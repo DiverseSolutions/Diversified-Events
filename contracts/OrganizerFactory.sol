@@ -10,8 +10,18 @@ contract OrganizerFactory is AccessControl {
   mapping(address => bool) public organizerHasNft;
   mapping(uint => address) public idToOrganizerAddress;
   uint public organizerLength = 0;
-
+  
   OrganizerNFT public nft;
+
+  event organizerNFTMinted (
+    address organizerAddress,
+    uint organizerId
+  );
+
+  event organizerNFTBurned (
+    address organizerAddress,
+    uint organizerId
+  );
 
   constructor() {
     _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
@@ -36,7 +46,17 @@ contract OrganizerFactory is AccessControl {
     idToOrganizerAddress[id] = msg.sender;
     organizerHasNft[msg.sender] = true;
 
-    organizerLength += 1;
+    organizerLength++;
+    emit organizerNFTMinted(msg.sender, id);
   }
 
+  function deleteOrganizer(uint id) external {
+    require(idToOrganizerAddress[id] == msg.sender, "NOT THE OWNER OF THIS NFT");
+    delete addressToOrganizerId[msg.sender];
+    delete idToOrganizerAddress[id];
+    delete organizerHasNft[msg.sender];
+    nft.organizerBurn(id);
+    organizerLength--;
+    emit organizerNFTBurned(msg.sender, id);
+  }
 }
