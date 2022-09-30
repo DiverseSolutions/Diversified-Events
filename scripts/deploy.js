@@ -1,31 +1,49 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
-// will compile your contracts, add the Hardhat Runtime Environment's members to the
-// global scope, and execute the script.
+const fs = require('fs');
+const path = require('path');
 const hre = require("hardhat");
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  const OrganizerFactory = await ethers.getContractFactory("OrganizerFactory");
+  const organizerFactoryContract = await OrganizerFactory.deploy();
+  await organizerFactoryContract.deployed();
 
-  const lockedAmount = hre.ethers.utils.parseEther("1");
+  // const FreelancerFactory = await ethers.getContractFactory("FreelancerFactory");
+  // const freelancerFactoryContract = await FreelancerFactory.deploy();
+  // await freelancerFactoryContract.deployed();
 
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  let organizerNftAddress = await organizerFactoryContract.nft();
+  // let freelancerNftAddress = await freelancerFactoryContract.nft();
 
-  await lock.deployed();
+  // const JobFactory = await ethers.getContractFactory("JobFactory");
+  // const jobFactoryContract = await JobFactory.deploy(organizerNftAddress,freelancerNftAddress);
+  // await jobFactoryContract.deployed();
 
-  console.log(
-    `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
-  );
+  console.log("organizerFactoryContract deployed to:", organizerFactoryContract.address);
+  // console.log("freelancerFactoryContract deployed to:", freelancerFactoryContract.address);
+  // console.log("jobFactoryContract deployed to:", jobFactoryContract.address);
+
+  const content = {
+    "organizerFactory" : organizerFactoryContract.address,
+    // "freelancerFactory" : freelancerFactoryContract.address,
+    // "jobFactory" : jobFactoryContract.address,
+  }
+  createAddressJson(path.join(__dirname, '/../app/genAddresses.json'),JSON.stringify(content))
+
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+function createAddressJson(path,content){
+  try{
+    fs.writeFileSync(path,content)
+    console.log("Created Contract Address JSON")
+  } catch (err) {
+    console.error(err)
+    return
+  }
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
