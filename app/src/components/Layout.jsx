@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 const Layout = () => {
   return (
     <div className='flex w-full'>
-      <div className='min-h-full'>
+      <div className='min-h-screen'>
         <Sidebar />
       </div>
       <div className='flex flex-col w-full '>

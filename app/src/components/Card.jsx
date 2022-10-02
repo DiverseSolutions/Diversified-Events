@@ -1,9 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Card = (props) => {
+  const history = useNavigate();
   const { data } = props;
+
   return (
-    <div className='flex flex-col justify-start text-center border rounded-2xl h-60 p-3 hover:border-black cursor-pointer'>
+    <div
+      className='flex flex-col justify-start text-center border rounded-2xl h-60 p-3 hover:border-black cursor-pointer'
+      onClick={() => history("/organizer")}
+    >
       <div className='w-full flex justify-center'>
         <img
           src={data.logo}

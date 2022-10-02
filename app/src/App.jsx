@@ -9,7 +9,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route path='/' element={<HomePage />} />
-          <Route path='organizer' element={<OrganizerPage />} />
+          <Route path='/organizer' element={<OrganizerPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
