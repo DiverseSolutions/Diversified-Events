@@ -8,14 +8,10 @@ const CardDetail = () => {
         <div className='flex flex-col w-full p-5 border rounded-2xl mt-4 gap-2 hover:border-black'>
           <div className='flex justify-between'>
             <div>
-              <span className='text-gray-700 text-sm'>
-                <span className='text-black font-semibold'>
-                  Address of event NFT:{" "}
-                </span>
-                {`${data.address.substring(0, 6)}...${data.address.substring(
-                  data.address.length - 4
-                )}`}
-              </span>
+              <span className='text-gray-700 text-sm'>{`${data.address.substring(
+                0,
+                6
+              )}...${data.address.substring(data.address.length - 4)}`}</span>
             </div>
             <span className='px-3 py-1 rounded-2xl bg-blue-700 text-white text-sm'>
               {data.status}
