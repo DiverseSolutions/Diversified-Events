@@ -19,12 +19,10 @@ describe("OrganizerNft - Functionality Test", function () {
 
     it("checks nft's details", async function () {
       
-
     let nftId = await this.organizerFactoryContract.addressToOrganizerId(this.odko.address)
     let nftAddress = await this.organizerFactoryContract.nft() 
     const nft = await ethers.getContractAt('OrganizerNFT',nftAddress)
     const nftDetail = await nft.getOrganizerDetail(nftId)
-
 
     expect(nftDetail.username).to.equal("mnkhod");
     expect(nftDetail.linkedIn).to.equal("https://www.linkedin.com/in/mnkhod/");

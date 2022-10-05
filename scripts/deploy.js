@@ -14,18 +14,18 @@ async function main() {
   let organizerNftAddress = await organizerFactoryContract.nft();
   // let freelancerNftAddress = await freelancerFactoryContract.nft();
 
-  // const JobFactory = await ethers.getContractFactory("JobFactory");
-  // const jobFactoryContract = await JobFactory.deploy(organizerNftAddress,freelancerNftAddress);
-  // await jobFactoryContract.deployed();
+  const eventFactory = await ethers.getContractFactory("EventFactory");
+  const eventFactoryContract = await eventFactory.deploy(organizerNftAddress);
+  await eventFactoryContract.deployed();
 
   console.log("organizerFactoryContract deployed to:", organizerFactoryContract.address);
   // console.log("freelancerFactoryContract deployed to:", freelancerFactoryContract.address);
-  // console.log("jobFactoryContract deployed to:", jobFactoryContract.address);
+  console.log("eventFactoryContract deployed to:", eventFactoryContract.address);
 
   const content = {
     "organizerFactory" : organizerFactoryContract.address,
     // "freelancerFactory" : freelancerFactoryContract.address,
-    // "jobFactory" : jobFactoryContract.address,
+    "eventFactory" : eventFactoryContract.address,
   }
   createAddressJson(path.join(__dirname, '/../app/genAddresses.json'),JSON.stringify(content))
 
