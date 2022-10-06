@@ -5,6 +5,7 @@
     "hardhat": "^2.11.2"
   },
   "dependencies": {
-    "moment": "^2.29.4"
+    "moment": "^2.29.4",
+    "react-switch": "^7.0.0"
   }
 }
