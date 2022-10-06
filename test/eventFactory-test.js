@@ -53,20 +53,29 @@ describe("EventFactory - Functionality Test", function () {
     const referrableNftLimit = 10;
     const referrableNftReferralLimit = 10;
 
+    const eventDetails = [eventName, eventProfileUrl, eventDescription, eventLocation, eventDate, eventSocialLinks, eventAdmins];
+
+    const normalNftDetails = [normalNftAllowed, normalNftPrice, normalNftDeadline, normalNftLimit];
+
+    const referrableNftDetails = [referrableNftAllowed, referrableNftPrice, referrableNftDeadline, referrableNftLimit, referrableNftReferralLimit];
+
 
     let tx = await this.eventFactoryContract.connect(this.odko).createEvent(
-      // event details
-      [eventName, eventProfileUrl, eventDescription, eventLocation, eventDate, eventSocialLinks, eventAdmins],
-      // normal nft details
-      [normalNftAllowed,normalNftPrice, normalNftDeadline, normalNftLimit],
-      // referrable nft details
-      [referrableNftAllowed, referrableNftPrice, referrableNftDeadline, referrableNftLimit, referrableNftReferralLimit],
+      eventDetails,
+      normalNftDetails,
+      referrableNftDetails,
     )
+
     await tx.wait();
 
-    expect(tx).to.emit().withArgs()
+    let emitedEvent = await expect(tx).to.emit(this.eventFactoryContract, "eventNFTMinted").withArgs(eventDetails, normalNftDetails, referrableNftDetails);
 
-    
+    // let emitedEvent = await expect(tx).to.emit(this.eventFactoryContract, "eventNFTMinted").withArgs(eventDetails, normalNftDetails, referrableNftDetails);
+  
+    console.log(emitedEvent)
+
+    // eventDetails, normalNftDetails, referrableNftDetails
+
     await expect(this.eventFactoryContract.connect(this.ireedui).createEvent(
       // event details
       [eventName, eventProfileUrl, eventDescription, eventLocation, eventDate, eventSocialLinks, eventAdmins],
