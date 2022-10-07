@@ -5,16 +5,18 @@ import "./nfts/NormalEventNFT.sol";
 import "./nfts/ReferrableEventNFT.sol";
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 
 import "./structs/EventDetails.sol";
 import "./structs/EventNormalNftDetails.sol";
 import "./structs/EventReferrableNftDetails.sol";
 import "./structs/OrganizerDetail.sol";
 
-
 import "./interfaces/IOrganizerNFT.sol";
 
 contract EventFactory is AccessControl {
+  using Counters for Counters.Counter;
+  Counters.Counter private _tokenIdCounter;
 
   mapping(address => uint[]) public organizerAddressToOrganizerEvents;
   mapping(address => uint) public organizerAddressToOrganizerEventsLength;
@@ -29,6 +31,7 @@ contract EventFactory is AccessControl {
   NormalEventNFT public normalEventNft;
   ReferrableEventNFT public referrableEventNft;
   IOrganizerNFT public organizerNft;
+
 
   event eventNFTMinted (
     EventDetails eventDetails,
@@ -49,10 +52,11 @@ contract EventFactory is AccessControl {
         EventReferrableNftDetails calldata _eventReferrableNftDetails
   ) external {
     require(organizerNft.balanceOf(msg.sender) > 0,"USER ISN'T ORGANIZER");
-    uint tokenId;
-
+    uint256 _tokenId = _tokenIdCounter.current();
+    _tokenIdCounter.increment();
     if (_eventReferrableNftDetails.referrableNftAllowed){
-      tokenId = referrableEventNft.eventMint(
+      referrableEventNft.eventMint(
+        _tokenId,
         msg.sender,
         _eventDetails,
         _eventNormalNftDetails,
@@ -60,16 +64,16 @@ contract EventFactory is AccessControl {
       );
     }
     else{
-      tokenId = normalEventNft.eventMint(
+      normalEventNft.eventMint(
+      _tokenId,
       msg.sender,
-        _eventDetails,
-        _eventNormalNftDetails
+      _eventDetails,
+      _eventNormalNftDetails
       );
     }
-    events.push(tokenId);
-    organizerAddressToOrganizerEvents[msg.sender].push(tokenId);
+    organizerAddressToOrganizerEvents[msg.sender].push(_tokenId);
     organizerAddressToOrganizerEventsLength[msg.sender]++;
-    eventIdToOrganizerAddress[tokenId] = msg.sender;
+    eventIdToOrganizerAddress[_tokenId] = msg.sender;
 
     emit eventNFTMinted(_eventDetails, _eventNormalNftDetails, _eventReferrableNftDetails);
   }
@@ -78,12 +82,12 @@ contract EventFactory is AccessControl {
     return organizerAddressToOrganizerEvents[msg.sender];
   }
 
-  function getAllEvents() external view returns(uint[] memory) {
-    return events;
-  }
+  // function getAllEvents() external view returns(uint[] memory) {
+  //   return events;
+  // }
 
-  function getEventsLength() external view returns(uint) {
-    return events.length;
-  }
+  // function getEventsLength() external view returns(uint) {
+  //   return events.length;
+  // }
 
 }

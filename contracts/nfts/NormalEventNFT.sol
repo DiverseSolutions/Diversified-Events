@@ -10,6 +10,8 @@ import "../structs/EventNormalNftDetails.sol";
 import "../structs/EventReferrableNftDetails.sol";
 import "../structs/OrganizerDetail.sol";
 
+import "../enums/EventStatus.sol";
+
 contract NormalEventNFT is ERC721, AccessControl {
     
     using Counters for Counters.Counter;
@@ -17,6 +19,7 @@ contract NormalEventNFT is ERC721, AccessControl {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     Counters.Counter private _tokenIdCounter;
     
+    EventStatus[] public eventStatus;
     EventDetails[] public eventDetails;
     EventNormalNftDetails[] public eventNormalNftDetails;
     EventReferrableNftDetails[] public eventReferrableNftDetails;
@@ -31,18 +34,19 @@ contract NormalEventNFT is ERC721, AccessControl {
     }
 
     function eventMint(
+        uint256 tokenId,
         address to,
         EventDetails calldata _eventDetails,
         EventNormalNftDetails calldata _eventNormalNftDetails
     ) external onlyRole(MINTER_ROLE) returns (uint256) {
 
-        uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
 
         eventDetails.push(_eventDetails);
         eventNormalNftDetails.push(_eventNormalNftDetails);
         eventReferrableNftDetails.push();
+        eventStatus.push();
 
         return tokenId;
     }
@@ -55,9 +59,9 @@ contract NormalEventNFT is ERC721, AccessControl {
     // Fallback function is called when msg.data is not empty
     fallback() external payable {}
 
-//     function cancelEvent(uint256 eventId) external payable {
-//
-//     }
+    function cancelEvent(uint256 eventId) external payable {
+
+    }
     
 //   function getUsersLength(uint256 eventId) external view returns(uint) {
     

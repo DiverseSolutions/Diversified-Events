@@ -32,13 +32,13 @@ contract ReferrableEventNFT is ERC721, AccessControl {
 
 
     function eventMint(
+        uint tokenId,
         address to,
         EventDetails calldata _eventDetails,
         EventNormalNftDetails calldata _eventNormalNftDetails,
         EventReferrableNftDetails calldata _eventReferrableNftDetails
     ) external onlyRole(MINTER_ROLE) returns (uint256) {
-
-        uint256 tokenId = _tokenIdCounter.current();
+        
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
 

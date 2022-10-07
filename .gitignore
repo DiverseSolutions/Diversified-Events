@@ -11,3 +11,5 @@ artifacts
 
 #js files
 hardhat.config.js
+package.json
+package-lock.json
