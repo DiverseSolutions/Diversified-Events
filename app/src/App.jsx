@@ -5,6 +5,7 @@ import MyEvent from "./pages/MyEvent";
 import OrganizerForm from "./pages/OrganizerForm";
 import MintEvent from "./pages/MintEvent";
 import Layout from "./components/Layout";
+import Test from "./pages/Test";
 
 function App() {
   return (
