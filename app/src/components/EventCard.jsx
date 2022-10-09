@@ -8,7 +8,7 @@ const Card = (props) => {
   return (
     <div
       className="flex flex-col justify-start text-center border rounded-2xl h-60 p-3 hover:border-black cursor-pointer"
-      onClick={() => history("/organizer")}
+      onClick={() => history("/event-detail")}
     >
       <div className="w-full flex justify-center">
         <img

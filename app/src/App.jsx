@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import OrganizerPage from "./pages/OrganizerPage";
+import EventDetail from "./pages/EventDetail";
 import MyEvent from "./pages/MyEvent";
 import OrganizerForm from "./pages/OrganizerForm";
 import MintEvent from "./pages/MintEvent";
@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/organizer" element={<OrganizerPage />} />
+          <Route path="/event-detail" element={<EventDetail />} />
           <Route path="/my-events" element={<MyEvent />} />
           <Route path="/organizer-form" element={<OrganizerForm />} />
           <Route path="/mint-event" element={<MintEvent />} />
