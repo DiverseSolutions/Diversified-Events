@@ -1,5 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
-// require('hardhat-abi-exporter');
+require('hardhat-abi-exporter');
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -17,11 +17,11 @@ module.exports = {
       url: "http://127.0.0.1:8545",
     }
   },
-  // abiExporter: {
-  //   path: './app/abi',
-  //   runOnCompile: true,
-  //   clear: true,
-  //   flat: true,
-  //   spacing: 2,
-  // }
+  abiExporter: {
+    path: './app/abi',
+    runOnCompile: true,
+    clear: true,
+    flat: true,
+    spacing: 2,
+  }
 };

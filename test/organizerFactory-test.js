@@ -35,8 +35,12 @@ describe("OrganizerFactory - Functionality Test", function () {
 
   it("checks organizer deletion process", async function () {
     
-    console.log(this.odko.address)
-    console.log(await this.organizerFactoryContract.idToOrganizerAddress(0))
+    await this.organizerFactoryContract.connect(this.odko).createOrganizer(
+      "mnkhod",
+      "https://www.linkedin.com/in/mnkhod/",
+      "mnkhod.dev@gmail.com"
+    )
+
     let odkosId = await this.organizerFactoryContract.connect(this.odko).addressToOrganizerId(this.odko.address)
     let deletingTx = await this.organizerFactoryContract.deleteOrganizer(odkosId)
     let deletingReceipt = await deletingTx.wait();
@@ -44,7 +48,6 @@ describe("OrganizerFactory - Functionality Test", function () {
     expect(deletingReceipt.events[2].args.organizerId).to.equal(0);
     expect(deletingReceipt.events[2].args.organizerAddress).to.equal(this.odko.address);
     expect(await this.organizerFactoryContract.organizerLength()).to.equal(0);
-
     expect(await this.organizerFactoryContract.organizerHasNft(this.odko.address)).to.equal(false);
     });
 

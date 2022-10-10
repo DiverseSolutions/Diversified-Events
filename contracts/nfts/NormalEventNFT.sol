@@ -5,63 +5,37 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-import "../structs/EventDetails.sol";
-import "../structs/EventNormalNftDetails.sol";
-import "../structs/EventReferrableNftDetails.sol";
-import "../structs/OrganizerDetail.sol";
-
-import "../enums/EventStatus.sol";
-
 contract NormalEventNFT is ERC721, AccessControl {
     
     using Counters for Counters.Counter;
 
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     Counters.Counter private _tokenIdCounter;
-    
-    EventStatus[] public eventStatus;
-    EventDetails[] public eventDetails;
-    EventNormalNftDetails[] public eventNormalNftDetails;
-    EventReferrableNftDetails[] public eventReferrableNftDetails;
 
-    constructor(address _eventFactory)
+    constructor(address _normalEvent)
         ERC721("NormalEventNFT", "NORM-EVENT")
     {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
 
         _grantRole(MINTER_ROLE, msg.sender);
-        _grantRole(MINTER_ROLE, _eventFactory);
+        _grantRole(MINTER_ROLE, _normalEvent);
     }
 
     function eventMint(
         uint256 tokenId,
-        address to,
-        EventDetails calldata _eventDetails,
-        EventNormalNftDetails calldata _eventNormalNftDetails
+        address to
     ) external onlyRole(MINTER_ROLE) returns (uint256) {
 
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
 
-        eventDetails.push(_eventDetails);
-        eventNormalNftDetails.push(_eventNormalNftDetails);
-        eventReferrableNftDetails.push();
-        eventStatus.push();
-
         return tokenId;
     }
 
-    // State Changing Functions
 
-    // Function to receive Ether. msg.data must be empty
-    receive() external payable {}
+    // function cancelEvent(uint256 eventId) external payable {
 
-    // Fallback function is called when msg.data is not empty
-    fallback() external payable {}
-
-    function cancelEvent(uint256 eventId) external payable {
-
-    }
+    // }
     
 //   function getUsersLength(uint256 eventId) external view returns(uint) {
     

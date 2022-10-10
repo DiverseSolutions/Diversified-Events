@@ -1,0 +1,561 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_organizerNft",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "previousAdminRole",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "newAdminRole",
+        "type": "bytes32"
+      }
+    ],
+    "name": "RoleAdminChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      }
+    ],
+    "name": "RoleGranted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      }
+    ],
+    "name": "RoleRevoked",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "eventId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "organizerAddress",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "bool",
+        "name": "isReferrable",
+        "type": "bool"
+      }
+    ],
+    "name": "eventCreated",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "DEFAULT_ADMIN_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "eventName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "eventProfileUrl",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "eventDescription",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "eventLocation",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "eventDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "eventSocialLinks",
+            "type": "string"
+          },
+          {
+            "internalType": "address[]",
+            "name": "eventAdmins",
+            "type": "address[]"
+          }
+        ],
+        "internalType": "struct EventDetails",
+        "name": "_eventDetails",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          {
+            "internalType": "bool",
+            "name": "normalNftAllowed",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "normalNftPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "normalNftDeadline",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "normalNftLimit",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct EventNormalNftDetails",
+        "name": "_eventNormalNftDetails",
+        "type": "tuple"
+      }
+    ],
+    "name": "createNormalEvent",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "eventName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "eventProfileUrl",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "eventDescription",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "eventLocation",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "eventDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "eventSocialLinks",
+            "type": "string"
+          },
+          {
+            "internalType": "address[]",
+            "name": "eventAdmins",
+            "type": "address[]"
+          }
+        ],
+        "internalType": "struct EventDetails",
+        "name": "_eventDetails",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          {
+            "internalType": "bool",
+            "name": "normalNftAllowed",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "normalNftPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "normalNftDeadline",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "normalNftLimit",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct EventNormalNftDetails",
+        "name": "_eventNormalNftDetails",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          {
+            "internalType": "bool",
+            "name": "referrableNftAllowed",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "referrableNftPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "referrableNftDeadline",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "referrableNftLimit",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "referrableNftReferralLimit",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct EventReferrableNftDetails",
+        "name": "_eventReferrableNftDetails",
+        "type": "tuple"
+      }
+    ],
+    "name": "createReferrableEvent",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "eventIdToOrganizerAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "events",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getOrganizerAllEvents",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getRoleAdmin",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "grantRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "hasRole",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "normalEvent",
+    "outputs": [
+      {
+        "internalType": "contract NormalEvent",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "organizerAddressToOrganizerEvents",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "organizerAddressToOrganizerEventsLength",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "organizerNft",
+    "outputs": [
+      {
+        "internalType": "contract IOrganizerNFT",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "referrableEvent",
+    "outputs": [
+      {
+        "internalType": "contract ReferrableEvent",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "renounceRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "revokeRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes4",
+        "name": "interfaceId",
+        "type": "bytes4"
+      }
+    ],
+    "name": "supportsInterface",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

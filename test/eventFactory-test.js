@@ -60,19 +60,29 @@ describe("EventFactory - Functionality Test", function () {
     const referrableNftDetails = [referrableNftAllowed, referrableNftPrice, referrableNftDeadline, referrableNftLimit, referrableNftReferralLimit];
 
 
-    let tx = await this.eventFactoryContract.connect(this.odko).createEvent(
+    let txReferrable = await this.eventFactoryContract.connect(this.odko).createReferrableEvent(
       eventDetails,
       normalNftDetails,
       referrableNftDetails,
     )
+    await txReferrable.wait();
+    
+    let emitedEventReferrable = await expect(txReferrable).to.emit(this.eventFactoryContract, "eventNFTMinted").withArgs(eventDetails, normalNftDetails, referrableNftDetails);
 
-    await tx.wait();
+    console.log(emitedEventReferrable)
 
-    let emitedEvent = await expect(tx).to.emit(this.eventFactoryContract, "eventNFTMinted").withArgs(eventDetails, normalNftDetails, referrableNftDetails);
+    let txNormal = await this.eventFactoryContract.connect(this.odko).createNormalEvent(
+      eventDetails,
+      normalNftDetails,
+    )
+    await txNormal.wait();
 
+    let emitedEventNormal = await expect(txNormal).to.emit(this.eventFactoryContract, "eventNFTMinted").withArgs(eventDetails, normalNftDetails, referrableNftDetails);
+
+    console.log(emitedEventNormal)
+    
     // let emitedEvent = await expect(tx).to.emit(this.eventFactoryContract, "eventNFTMinted").withArgs(eventDetails, normalNftDetails, referrableNftDetails);
   
-    console.log(emitedEvent)
 
     // eventDetails, normalNftDetails, referrableNftDetails
 

@@ -5,39 +5,21 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract ReferrableEventNFT is ERC721, AccessControl {
-    
+contract NormalAccessNFT is ERC721, AccessControl {
     using Counters for Counters.Counter;
 
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
-    Counters.Counter private _tokenIdCounter;
-    
+    Counters.Counter public _tokenIdCounter;
 
-    constructor(address _eventFactory)
-        ERC721("ReferrableEventNFT", "REF-EVENT")
-    {
-        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
-
-        _grantRole(MINTER_ROLE, msg.sender);
-        _grantRole(MINTER_ROLE, _eventFactory);
+    constructor(address _event) ERC721("ReferrableAccess", "REFACC") {
+        _grantRole(DEFAULT_ADMIN_ROLE, _event);
+        _grantRole(MINTER_ROLE, _event);
     }
 
-
-    function eventMint(
-        uint tokenId,
-        address to
-    ) external onlyRole(MINTER_ROLE) returns (uint256) {
+    function safeMint(address to) public onlyRole(MINTER_ROLE) {
+        uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
-        
-        return tokenId;
-    }
-
-    // Modifiers
-
-    modifier onlyEventOwner(uint256 eventId, address _owner) {
-        require(ownerOf(eventId) == _owner, "NOT EVENT OWNER");
-        _;
     }
 
     // The following functions are overrides required by Solidity.

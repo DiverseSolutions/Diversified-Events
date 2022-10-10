@@ -28,6 +28,10 @@ describe("OrganizerNft - Functionality Test", function () {
     expect(nftDetail.linkedIn).to.equal("https://www.linkedin.com/in/mnkhod/");
     expect(nftDetail.email).to.equal("mnkhod.dev@gmail.com");
     expect(nftDetail.eventIds.length).to.equal(0);
+
+    expect(await this.organizerFactoryContract.idToOrganizerAddress(nftId)).to.equal(this.odko.address);
+    expect(await this.organizerFactoryContract.organizerHasNft(this.odko.address)).to.equal(true);
+    expect(await this.organizerFactoryContract.addressToOrganizerId(this.odko.address)).to.equal(0);
   });
 
 });

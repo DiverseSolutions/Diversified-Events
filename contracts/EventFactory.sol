@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
+import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+
 import "./nfts/NormalEventNFT.sol";
 import "./nfts/ReferrableEventNFT.sol";
 
-import "@openzeppelin/contracts/access/AccessControl.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
+import "./functionality/ReferrableEvent.sol";
+import "./functionality/NormalEvent.sol";
 
 import "./structs/EventDetails.sol";
 import "./structs/EventNormalNftDetails.sol";
@@ -24,58 +27,75 @@ contract EventFactory is AccessControl {
 
   uint[] public events;
 
-  EventDetails[] public eventDetails;
-  EventNormalNftDetails[] public eventNormalNftDetails;
-  EventReferrableNftDetails[] public eventReferrableNftDetails;
 
-  NormalEventNFT public normalEventNft;
-  ReferrableEventNFT public referrableEventNft;
+  // NormalEventNFT public normalEventNft;
+  // ReferrableEventNFT public referrableEventNft;
   IOrganizerNFT public organizerNft;
 
+  NormalEvent public normalEvent;
+  ReferrableEvent public referrableEvent;
 
-  event eventNFTMinted (
-    EventDetails eventDetails,
-    EventNormalNftDetails eventNormalNftDetails,
-    EventReferrableNftDetails eventReferrableNftDetails
+
+  event eventCreated (
+    uint indexed eventId,
+    address indexed organizerAddress,
+    bool indexed isReferrable
   );
 
   constructor(address _organizerNft) {
     _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
-    normalEventNft = new NormalEventNFT(address(this));
-    referrableEventNft = new ReferrableEventNFT(address(this));
     organizerNft = IOrganizerNFT(_organizerNft);
+
+    referrableEvent = ReferrableEvent(address(this));
+    normalEvent = NormalEvent(address(this));
+    // normalEventNft = new NormalEventNFT(address(this));
+    // referrableEventNft = new ReferrableEventNFT(address(this));
   }
 
-  function createEvent(
-        EventDetails calldata _eventDetails,
-        EventNormalNftDetails calldata _eventNormalNftDetails,
-        EventReferrableNftDetails calldata _eventReferrableNftDetails
+  function createNormalEvent(
+    EventDetails calldata _eventDetails,
+    EventNormalNftDetails calldata _eventNormalNftDetails
   ) external {
     require(organizerNft.balanceOf(msg.sender) > 0,"USER ISN'T ORGANIZER");
+    
     uint256 _tokenId = _tokenIdCounter.current();
     _tokenIdCounter.increment();
-    if (_eventReferrableNftDetails.referrableNftAllowed){
-      referrableEventNft.eventMint(
-        _tokenId,
-        msg.sender,
-        _eventDetails,
-        _eventNormalNftDetails,
-        _eventReferrableNftDetails
-      );
-    }
-    else{
-      normalEventNft.eventMint(
+    
+    normalEvent.createEvent(
       _tokenId,
-      msg.sender,
       _eventDetails,
       _eventNormalNftDetails
-      );
-    }
+    );
+    
     organizerAddressToOrganizerEvents[msg.sender].push(_tokenId);
     organizerAddressToOrganizerEventsLength[msg.sender]++;
     eventIdToOrganizerAddress[_tokenId] = msg.sender;
+    
+    emit eventCreated(_tokenId, msg.sender, false);
+  }
 
-    emit eventNFTMinted(_eventDetails, _eventNormalNftDetails, _eventReferrableNftDetails);
+  function createReferrableEvent(
+    EventDetails calldata _eventDetails,
+    EventNormalNftDetails calldata _eventNormalNftDetails,
+    EventReferrableNftDetails calldata _eventReferrableNftDetails
+  ) external {
+    require(organizerNft.balanceOf(msg.sender) > 0,"USER ISN'T ORGANIZER");
+    
+    uint256 _tokenId = _tokenIdCounter.current();
+    _tokenIdCounter.increment();
+    
+    referrableEvent.createEvent(
+        _tokenId,
+        _eventDetails,
+        _eventNormalNftDetails,
+        _eventReferrableNftDetails
+    );
+    
+    organizerAddressToOrganizerEvents[msg.sender].push(_tokenId);
+    organizerAddressToOrganizerEventsLength[msg.sender]++;
+    eventIdToOrganizerAddress[_tokenId] = msg.sender;
+    
+    emit eventCreated(_tokenId, msg.sender, true);
   }
 
   function getOrganizerAllEvents() external view returns(uint[] memory){
