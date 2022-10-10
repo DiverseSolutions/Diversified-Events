@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { hideConnectWalletModal } from "../../slices/modalSlice";
 import { connectMetamask } from "../../slices/metamaskSlice";
@@ -38,34 +38,34 @@ export default function ConnectWalletModal() {
         </div>
         <div className='flex flex-col gap-2 w-full justify-center text-center mt-8'>
           <div
-            className='flex justify-center items-center py-1 gap-2 w-full border rounded-3xl'
+            className='flex justify-center items-center py-1 gap-2 w-full border rounded-3xl cursor-pointer'
             onClick={() => connectToMetamask()}
           >
             <img
               src='https://snapshot.mypinata.cloud/ipfs/QmTE7VPXMhriKAobMWEiC5S3oG22p4G6AXGyGdNWQTQ3Fv'
               width={"30px"}
               height={"30px"}
-              alt=''
+              alt='MetaMask image'
             />
-            <span>MetaMask</span>
+            <span className='cursor-pointer'>MetaMask</span>
           </div>
           <div className='flex justify-center items-center py-1 gap-2 w-full border rounded-3xl'>
             <img
               src='https://snapshot.mypinata.cloud/ipfs/QmZRVqHpgRemw13aoovP2EaQdVtjzXRaQGQZsCLXWaNn9x'
               width={"30px"}
               height={"30px"}
-              alt=''
+              alt='WalletConnect image'
             />
-            <span>WalletConnect</span>
+            <span className='cursor-pointer'>WalletConnect</span>
           </div>
           <div className='flex justify-center items-center py-1 gap-2 w-full border rounded-3xl'>
             <img
               src='https://snapshot.mypinata.cloud/ipfs/QmbJKEaeMz6qR3DmJSTxtYtrZeQPptVfnnYK72QBsvAw5q'
               width={"30px"}
               height={"30px"}
-              alt=''
+              alt='Coinbase Wallet image'
             />
-            <span>Coinbase Wallet</span>
+            <span className='cursor-pointer'>Coinbase Wallet</span>
           </div>
           <div className='flex justify-center items-center py-1 w-full border rounded-3xl'>
             <span>Show more</span>

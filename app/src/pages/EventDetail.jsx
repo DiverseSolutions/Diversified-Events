@@ -1,12 +1,20 @@
 import React from "react";
+import { useState } from "react";
 
 export default function OrganizerPage() {
+  const [isTextHidden, setTextHidden] = useState(true);
+  const [_isTextHidden, _setTextHidden] = useState(true);
+
+  const onClick = () => setTextHidden(!isTextHidden);
+  const _onClick = () => _setTextHidden(!_isTextHidden);
+
   return (
     <div className="flex w-full justify-center">
       <div>
         <div className="flex max-w-3xl w-full mt-10 mb-5 justify-center">
           <img
-            src="https://scontent.fuln6-2.fna.fbcdn.net/v/t39.30808-6/308968831_406158808377692_4915562768795632989_n.png?stp=dst-jpg_p960x960&_nc_cat=110&ccb=1-7&_nc_sid=340051&_nc_ohc=YjV0ckEhNZEAX-xGFHK&_nc_ht=scontent.fuln6-2.fna&oh=00_AT_WTBD3_fNauLN0_0pMX0rZFu0DLA1ks_kmoxzajZbjNQ&oe=6341C77B"
+            className="border rounded-2xl"
+            src="https://scontent.fuln6-2.fna.fbcdn.net/v/t39.30808-6/307863160_5456046154487122_5745433977868117992_n.jpg?stp=dst-jpg_p960x960&_nc_cat=105&ccb=1-7&_nc_sid=340051&_nc_ohc=P--xzGChOLEAX8r1Rfh&_nc_ht=scontent.fuln6-2.fna&oh=00_AT_fMo2XYYrc3I7aZAi7oe9w_5-wh2EQ1WDewyOFMRc8eg&oe=634826FB"
             alt=""
           />
         </div>
@@ -23,9 +31,6 @@ export default function OrganizerPage() {
             <span className="text-slate-600 text-xl">
               0.008 ETH - Paid Online Event
             </span>
-            <button className="flex justify-center text-white bg-blue-600 px-10 py-1 border rounded-3xl hover:border-black">
-              Join
-            </button>
           </div>
 
           <div className="border rounded-2xl my-5 p-6">
@@ -77,6 +82,49 @@ export default function OrganizerPage() {
                 <br />
                 <span>How to add JavaScript in HTML?</span> <br />
               </div>
+            </div>
+          </div>
+
+          <div className="flex justify-between">
+            <div>
+              <button
+                className="flex justify-center text-white bg-blue-600 px-10 py-1 mb-3 border rounded-3xl hover:border-black"
+                onClick={onClick}
+              >
+                {isTextHidden ? "Buy referralbe nft ticket" : "Close"}
+              </button>
+              {!isTextHidden ? (
+                <div className="border rounded-2xl my-5 p-6 max-w-[15rem]">
+                  <span className="text-lg">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
+                    non explicabo ex quibusdam, doloribus cum quo? Corrupti
+                    fugit doloribus impedit.
+                  </span>
+                  <button className="flex justify-center text-white bg-blue-600 px-10 my-2 py-1 border rounded-3xl hover:border-black">
+                    Join
+                  </button>
+                </div>
+              ) : null}
+            </div>
+            <div>
+              <button
+                className="flex justify-center text-white bg-blue-600 px-10 py-1 mb-3 border rounded-3xl hover:border-black"
+                onClick={_onClick}
+              >
+                {_isTextHidden ? "Buy normal nft ticket" : "Close"}
+              </button>
+              {!_isTextHidden ? (
+                <div className="border rounded-2xl my-5 p-6 max-w-[15rem]">
+                  <span className="text-lg">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Temporibus a accusamus dicta animi rem, vitae laborum ad
+                    voluptas tenetur eos?
+                  </span>
+                  <button className="flex justify-center text-white bg-blue-600 px-10 py-1 mt-2 border rounded-3xl hover:border-black">
+                    Join
+                  </button>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
