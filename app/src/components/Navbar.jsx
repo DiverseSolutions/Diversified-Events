@@ -12,7 +12,7 @@ const Navbar = () => {
     <div className='flex h-[70px] justify-center items-center border-b border-t w-full'>
       <div className='flex items-center justify-between max-w-5xl w-full'>
         <span
-          className='font-medium text-lg cursor-pointer'
+          className='font-medium text-lg cursor-pointer select-none'
           onClick={() => navigate("/")}
         >
           Diversified Events
@@ -25,7 +25,7 @@ const Navbar = () => {
             }}
           >
             {metamask && metamask.isConnected ? (
-              <div className='flex items-center gap-2'>
+              <div className='flex items-center gap-2 select-none'>
                 <img
                   src='https://cdn.stamp.fyi/avatar/eth:0x1Fd9afb27FF1194b92C80eDA157C7eAC4C509F33?s=36'
                   alt=''

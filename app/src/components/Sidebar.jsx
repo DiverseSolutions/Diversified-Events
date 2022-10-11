@@ -18,9 +18,9 @@ const Sidebar = () => {
         />
       </div>
       <div className='w-full h-[1px] bg-[#e5e7eb]'></div>
-      <div className='flex flex-col gap-2 text-md mt-4 w-full px-2'>
+      <div className='flex flex-col gap-2 text-md mt-4 w-full px-2 select-none'>
         <div
-          className='px-4 py-2 border-transparent rounded-full hover:bg-blue-100 hover:text-blue-800 cursor-pointer flex gap-2 w-full items-center'
+          className='px-4 py-2 border-transparent rounded-lg hover:bg-blue-100 hover:text-blue-800 cursor-pointer flex gap-2 w-full items-center'
           onClick={() => navigate("/organizer-form")}
         >
           <svg width='1.2em' height='1.2em' viewBox='0 0 24 24'>
@@ -32,7 +32,7 @@ const Sidebar = () => {
           <span>Become organizer</span>
         </div>
         <div
-          className='px-4 py-2 border-transparent rounded-full hover:bg-blue-100 hover:text-blue-800 cursor-pointer flex gap-2 w-full items-center'
+          className='px-4 py-2 border-transparent rounded-lg hover:bg-blue-100 hover:text-blue-800 cursor-pointer flex gap-2 w-full items-center'
           onClick={() => navigate("/mint-event")}
         >
           <svg width='1.2em' height='1.2em' viewBox='0 0 256 256'>
