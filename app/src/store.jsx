@@ -13,6 +13,7 @@ import {
 
 import { modalReducer } from "./slices/modalSlice";
 import { metamaskReducer } from "./slices/metamaskSlice";
+import { alertReducer } from "./slices/alertSlice";
 
 const persistConfig = {
   key: "root",
@@ -23,6 +24,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   modal: modalReducer,
   metamask: metamaskReducer,
+  alerts: alertReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
