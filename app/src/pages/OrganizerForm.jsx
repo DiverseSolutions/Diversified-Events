@@ -1,14 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { triggerSuccessAlert } from "../slices/alertSlice";
+import { getOrganizerFactoryContract } from "../../contracts/OrganizerContractHelper";
 
-export default function MintEvent() {
+export default function OrganizerForm() {
+  const [data, setData] = useState([]);
   const [userNameInput, setUserName] = useState("");
   const [userLinkedinInput, setLinkedin] = useState("");
   const [userEmailInput, setEmail] = useState("");
-
+  const [state, setState] = useState();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    createOrganizer();
+  }, []);
+
+  function handleChange(e) {
+    setData({ ...data, [e.target.name]: e.target.value });
+  }
+
+  async function createOrganizer() {
+    try {
+      let { organizerReadContract, organizerWriteContract } =
+        await getOrganizerFactoryContract();
+
+      const a = await organizerWriteContract.createOrganizer(
+        data._username,
+        data._linkedIn,
+        data._email
+      );
+    } catch (err) {
+      console.log("err: ", err);
+    }
+  }
+
+  console.log("data: ", data);
 
   return (
     <div className='w-full'>
@@ -28,33 +55,37 @@ export default function MintEvent() {
             <div className='space-y-2'>
               <p className='font-medium'>Enter your name</p>
               <input
+                name='_username'
                 type='text'
                 className='border rounded w-full h-12 px-3 focus:outline-none'
                 placeholder='Chingun Amarbaatar'
-                onChange={(e) => {}}
+                onChange={handleChange}
               />
             </div>
             <div className='space-y-2'>
               <p className='font-medium'>Enter your e-mail</p>
               <input
+                name='_email'
                 className='border rounded w-full h-12 px-3 focus:outline-none'
                 type='email'
                 placeholder='chingunee.dev@gmail.com'
-                onChange={(e) => {}}
+                onChange={handleChange}
               />
             </div>
             <div className='space-y-2'>
-              <p className='font-medium'>Enter your name</p>
+              <p className='font-medium'>Enter your linkedin</p>
               <input
+                name='_linkedIn'
                 className='border rounded w-full h-12 px-3 focus:outline-none'
                 type='url'
                 placeholder='www.linkedin.com/in/chingunee'
-                onChange={(e) => {}}
+                onChange={handleChange}
               />
             </div>
             <div className='w-full flex justify-center items-center rounded bg-blue-500 hover:bg-blue-600 cursor-pointer h-10 font-semibold text-white'>
               <button
                 onClick={() => {
+                  testContract();
                   dispatch(
                     triggerSuccessAlert({ content: "Success Organizer NFT" })
                   );
