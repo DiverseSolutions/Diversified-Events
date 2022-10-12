@@ -13,11 +13,13 @@ async function main() {
   const eventFactoryContract = await eventFactory.deploy(organizerNftAddress);
   await eventFactoryContract.deployed();
 
+  console.log("organizerNftContract deployed to:", organizerNftAddress);
   console.log("organizerFactoryContract deployed to:", organizerFactoryContract.address);
   console.log("eventFactoryContract deployed to:", eventFactoryContract.address);
 
   const content = {
     "organizerFactory" : organizerFactoryContract.address,
+    "organizerNft" : organizerNftAddress,
     "eventFactory" : eventFactoryContract.address,
   }
   createAddressJson(path.join(__dirname, '/../app/genAddresses.json'),JSON.stringify(content))
