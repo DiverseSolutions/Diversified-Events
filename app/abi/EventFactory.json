@@ -126,40 +126,64 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "addressToOrganizerEventIds",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "components": [
           {
             "internalType": "string",
-            "name": "eventName",
+            "name": "name",
             "type": "string"
           },
           {
             "internalType": "string",
-            "name": "eventProfileUrl",
+            "name": "profile",
             "type": "string"
           },
           {
             "internalType": "string",
-            "name": "eventDescription",
+            "name": "description",
             "type": "string"
           },
           {
             "internalType": "string",
-            "name": "eventLocation",
+            "name": "location",
             "type": "string"
           },
           {
             "internalType": "uint256",
-            "name": "eventDate",
+            "name": "date",
             "type": "uint256"
           },
           {
             "internalType": "string",
-            "name": "eventSocialLinks",
+            "name": "socialLink",
             "type": "string"
           },
           {
             "internalType": "address[]",
-            "name": "eventAdmins",
+            "name": "admins",
             "type": "address[]"
           }
         ],
@@ -170,27 +194,22 @@
       {
         "components": [
           {
-            "internalType": "bool",
-            "name": "normalNftAllowed",
-            "type": "bool"
-          },
-          {
             "internalType": "uint256",
-            "name": "normalNftPrice",
+            "name": "price",
             "type": "uint256"
           },
           {
             "internalType": "uint256",
-            "name": "normalNftDeadline",
+            "name": "deadline",
             "type": "uint256"
           },
           {
             "internalType": "uint256",
-            "name": "normalNftLimit",
+            "name": "limit",
             "type": "uint256"
           }
         ],
-        "internalType": "struct EventNormalNftDetails",
+        "internalType": "struct EventNftDetails",
         "name": "_eventNormalNftDetails",
         "type": "tuple"
       }
@@ -201,112 +220,16 @@
     "type": "function"
   },
   {
-    "inputs": [
+    "inputs": [],
+    "name": "eventId",
+    "outputs": [
       {
-        "components": [
-          {
-            "internalType": "string",
-            "name": "eventName",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "eventProfileUrl",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "eventDescription",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "eventLocation",
-            "type": "string"
-          },
-          {
-            "internalType": "uint256",
-            "name": "eventDate",
-            "type": "uint256"
-          },
-          {
-            "internalType": "string",
-            "name": "eventSocialLinks",
-            "type": "string"
-          },
-          {
-            "internalType": "address[]",
-            "name": "eventAdmins",
-            "type": "address[]"
-          }
-        ],
-        "internalType": "struct EventDetails",
-        "name": "_eventDetails",
-        "type": "tuple"
-      },
-      {
-        "components": [
-          {
-            "internalType": "bool",
-            "name": "normalNftAllowed",
-            "type": "bool"
-          },
-          {
-            "internalType": "uint256",
-            "name": "normalNftPrice",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "normalNftDeadline",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "normalNftLimit",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct EventNormalNftDetails",
-        "name": "_eventNormalNftDetails",
-        "type": "tuple"
-      },
-      {
-        "components": [
-          {
-            "internalType": "bool",
-            "name": "referrableNftAllowed",
-            "type": "bool"
-          },
-          {
-            "internalType": "uint256",
-            "name": "referrableNftPrice",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "referrableNftDeadline",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "referrableNftLimit",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "referrableNftReferralLimit",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct EventReferrableNftDetails",
-        "name": "_eventReferrableNftDetails",
-        "type": "tuple"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    "name": "createReferrableEvent",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -317,7 +240,7 @@
         "type": "uint256"
       }
     ],
-    "name": "eventIdToOrganizerAddress",
+    "name": "eventIdToAddress",
     "outputs": [
       {
         "internalType": "address",
@@ -449,91 +372,6 @@
   },
   {
     "inputs": [],
-    "name": "normalEvent",
-    "outputs": [
-      {
-        "internalType": "contract NormalEvent",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "organizerAddressToOrganizerEvents",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "organizerAddressToOrganizerEventsLength",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "organizerDetails",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "username",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "linkedIn",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "email",
-        "type": "string"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "organizerFactory",
     "outputs": [
       {
@@ -551,19 +389,6 @@
     "outputs": [
       {
         "internalType": "contract IOrganizerNFT",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "referrableEvent",
-    "outputs": [
-      {
-        "internalType": "contract ReferrableEvent",
         "name": "",
         "type": "address"
       }

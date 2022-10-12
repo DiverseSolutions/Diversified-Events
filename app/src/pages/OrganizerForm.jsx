@@ -34,8 +34,6 @@ export default function OrganizerForm() {
     }
   }
 
-  console.log("disableLoaderBtn: ", disableLoaderBtn);
-
   return (
     <div className='w-full'>
       <div className='mt-10'>

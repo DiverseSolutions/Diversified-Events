@@ -2,11 +2,11 @@
 pragma solidity ^0.8.4;
 
 struct EventDetails {
-    string eventName;
-    string eventProfileUrl;
-    string eventDescription;
-    string eventLocation;
-    uint256 eventDate;
-    string eventSocialLinks;
-    address[] eventAdmins;
+    string name;
+    string profile;
+    string description;
+    string location;
+    uint256 date;
+    string socialLink;
+    address[] admins;
 }

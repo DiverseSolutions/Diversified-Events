@@ -15,7 +15,8 @@ export default function HomePage() {
     try{
       const { eventFactoryReadContract } = await getEventFactoryContract();
       let result = await eventFactoryReadContract.getAllEvents();
-      setEvents(result);
+      let results = result.map((i) => i.toNumber())
+      setEvents(results);
     }catch(e){
       console.log(e)
     }
