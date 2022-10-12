@@ -14,7 +14,7 @@ async function getOrganizerFactoryContract() {
 
   let organizerWriteContract = organizerReadContract.connect(signer);
 
-  return { organizerReadContract, organizerWriteContract };
+  return { organizerReadContract, organizerWriteContract,provider,signer };
 }
 
 export { getOrganizerFactoryContract };

@@ -25,17 +25,21 @@ export default function OrganizerForm() {
       let { organizerReadContract, organizerWriteContract } =
         await getOrganizerFactoryContract();
 
-      const a = await organizerWriteContract.createOrganizer(
+      const tx = await organizerWriteContract.createOrganizer(
         data._username,
         data._linkedIn,
         data._email
+      );
+
+      await tx.wait()
+
+      dispatch(
+        triggerSuccessAlert({ content: "Success Organizer NFT" })
       );
     } catch (err) {
       console.log("err: ", err);
     }
   }
-
-  console.log("data: ", data);
 
   return (
     <div className='w-full'>
@@ -84,12 +88,7 @@ export default function OrganizerForm() {
             </div>
             <div className='w-full flex justify-center items-center rounded bg-blue-500 hover:bg-blue-600 cursor-pointer h-10 font-semibold text-white'>
               <button
-                onClick={() => {
-                  testContract();
-                  dispatch(
-                    triggerSuccessAlert({ content: "Success Organizer NFT" })
-                  );
-                }}
+                onClick={() => { createOrganizer() }}
               >
                 Mint Event Organizer NFT
               </button>

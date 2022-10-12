@@ -1,9 +1,11 @@
 import React from "react";
 import Logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 const Sidebar = () => {
   let navigate = useNavigate();
+  const app = useSelector((state) => state.app);
 
   return (
     <div className='w-[240px] h-full border flex flex-col items-center cursor-pointer '>
@@ -31,18 +33,20 @@ const Sidebar = () => {
           </svg>
           <span>All Events</span>
         </div>
-        <div
-          className='px-4 py-2 border-transparent rounded-lg hover:bg-blue-100 hover:text-blue-800 cursor-pointer flex gap-2 w-full items-center'
-          onClick={() => navigate("/organizer-form")}
-        >
-          <svg width='1.2em' height='1.2em' viewBox='0 0 24 24'>
-            <path
-              fill='currentColor'
-              d='m2 19.99l7.5-7.51l4 4l7.09-7.97L22 9.92l-8.5 9.56l-4-4l-6 6.01l-1.5-1.5zm1.5-4.5l6-6.01l4 4L22 3.92l-1.41-1.41l-7.09 7.97l-4-4L2 13.99l1.5 1.5z'
-            ></path>
-          </svg>
-          <span>Become organizer</span>
-        </div>
+        { !app.isOrganizer && (
+          <div
+            className='px-4 py-2 border-transparent rounded-lg hover:bg-blue-100 hover:text-blue-800 cursor-pointer flex gap-2 w-full items-center'
+            onClick={() => navigate("/organizer-form")}
+          >
+            <svg width='1.2em' height='1.2em' viewBox='0 0 24 24'>
+              <path
+                fill='currentColor'
+                d='m2 19.99l7.5-7.51l4 4l7.09-7.97L22 9.92l-8.5 9.56l-4-4l-6 6.01l-1.5-1.5zm1.5-4.5l6-6.01l4 4L22 3.92l-1.41-1.41l-7.09 7.97l-4-4L2 13.99l1.5 1.5z'
+              ></path>
+            </svg>
+            <span>Become organizer</span>
+          </div>
+        ) }
         <div
           className='px-4 py-2 border-transparent rounded-lg hover:bg-blue-100 hover:text-blue-800 cursor-pointer flex gap-2 w-full items-center'
           onClick={() => navigate("/mint-event")}

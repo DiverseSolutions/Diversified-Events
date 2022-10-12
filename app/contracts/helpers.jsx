@@ -8,6 +8,14 @@ async function getContractEssentials() {
   return { provider, signer };
 }
 
+function toInteger18(amount) {
+  return parseInt(parse18(amount))
+}
+
+function toFloat18(amount) {
+  return parseFloat(parse18(amount))
+}
+
 function parse(amount, decimal) {
   return ethers.utils.parseUnits(amount.toString(), decimal);
 }
@@ -24,4 +32,4 @@ function format18(amount) {
   return ethers.utils.formatUnits(amount.toString(), 18);
 }
 
-export { parse, parse18, format, format18, getContractEssentials };
+export { toInteger18,toFloat18,parse, parse18, format, format18, getContractEssentials };
