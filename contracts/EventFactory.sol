@@ -15,6 +15,8 @@ import "./structs/EventNormalNftDetails.sol";
 import "./structs/EventReferrableNftDetails.sol";
 import "./structs/OrganizerDetail.sol";
 
+import "../contracts/OrganizerFactory.sol";
+
 import "./interfaces/IOrganizerNFT.sol";
 
 contract EventFactory is AccessControl {
@@ -32,11 +34,14 @@ contract EventFactory is AccessControl {
   // ReferrableEventNFT public referrableEventNft;
   IOrganizerNFT public organizerNft;
 
+  OrganizerFactory public organizerFactory;
+
+  OrganizerDetail[] public organizerDetails;
+  
   NormalEvent public normalEvent;
   ReferrableEvent public referrableEvent;
 
-
-  event eventCreated (
+  event EventCreated (
     uint indexed eventId,
     address indexed organizerAddress,
     bool indexed isReferrable
@@ -46,8 +51,8 @@ contract EventFactory is AccessControl {
     _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     organizerNft = IOrganizerNFT(_organizerNft);
 
-    referrableEvent = ReferrableEvent(address(this));
-    normalEvent = NormalEvent(address(this));
+    referrableEvent = new ReferrableEvent(address(this));
+    normalEvent = new NormalEvent(address(this));
     // normalEventNft = new NormalEventNFT(address(this));
     // referrableEventNft = new ReferrableEventNFT(address(this));
   }
@@ -57,21 +62,25 @@ contract EventFactory is AccessControl {
     EventNormalNftDetails calldata _eventNormalNftDetails
   ) external {
     require(organizerNft.balanceOf(msg.sender) > 0,"USER ISN'T ORGANIZER");
-    
     uint256 _tokenId = _tokenIdCounter.current();
     _tokenIdCounter.increment();
     
+    OrganizerDetail storage detail = organizerDetails[organizerFactory.addressToOrganizerId(msg.sender)];
+    
+    detail.eventIds.push(_tokenId);
+    
     normalEvent.createEvent(
+      msg.sender,
       _tokenId,
       _eventDetails,
       _eventNormalNftDetails
     );
-    
+
     organizerAddressToOrganizerEvents[msg.sender].push(_tokenId);
     organizerAddressToOrganizerEventsLength[msg.sender]++;
     eventIdToOrganizerAddress[_tokenId] = msg.sender;
     
-    emit eventCreated(_tokenId, msg.sender, false);
+    emit EventCreated(_tokenId, msg.sender, false);
   }
 
   function createReferrableEvent(
@@ -85,6 +94,7 @@ contract EventFactory is AccessControl {
     _tokenIdCounter.increment();
     
     referrableEvent.createEvent(
+        msg.sender,
         _tokenId,
         _eventDetails,
         _eventNormalNftDetails,
@@ -95,7 +105,7 @@ contract EventFactory is AccessControl {
     organizerAddressToOrganizerEventsLength[msg.sender]++;
     eventIdToOrganizerAddress[_tokenId] = msg.sender;
     
-    emit eventCreated(_tokenId, msg.sender, true);
+    emit EventCreated(_tokenId, msg.sender, true);
   }
 
   function getOrganizerAllEvents() external view returns(uint[] memory){

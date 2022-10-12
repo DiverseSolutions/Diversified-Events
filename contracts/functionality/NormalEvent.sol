@@ -43,8 +43,8 @@ contract NormalEvent {
 
     constructor(address _eventFactory) {
         eventFactory = EventFactory(_eventFactory);
-        normalEventNft = new NormalEventNFT(address(this));
-        normalAccessNft = new NormalAccessNFT(address(this));
+        normalEventNft = new NormalEventNFT(msg.sender);
+        normalAccessNft = new NormalAccessNFT(msg.sender);
     }
 
     modifier onlyEventOwner(uint _eventId) {
@@ -56,14 +56,16 @@ contract NormalEvent {
     }
 
     function createEvent(
+        address _to,
         uint256 _eventId,
         EventDetails calldata _eventDetails,
         EventNormalNftDetails calldata _eventNormalNftDetails
     ) external {
-        normalEventNft.eventMint(_eventId, msg.sender);
+        normalEventNft.eventMint(_eventId, _to);
 
         eventDetails.push(_eventDetails);
         eventNormalNftDetails.push(_eventNormalNftDetails);
+        eventReferrableNftDetails.push();
         eventStatus.push();
         
         emit eventDetailsAdded(_eventDetails, _eventNormalNftDetails);
@@ -78,10 +80,10 @@ contract NormalEvent {
         emit NormalAccessNftMinted(_eventId, msg.sender);
     }
 
-    function setEventStatus (uint _eventId, uint _status) public onlyEventOwner(_eventId) {
-        eventStatus[_eventId] = EventStatus(_status);
-        emit EventStatusChanged(_eventId, EventStatus(_status));
-    }
+    // function setEventStatus (uint _eventId, uint _status) public onlyEventOwner(_eventId) {
+    //     eventStatus[_eventId] = EventStatus(_status);
+    //     emit EventStatusChanged(_eventId, EventStatus(_status));
+    // }
 
     function cancelEvent (uint _eventId) public onlyEventOwner(_eventId){
         eventStatus[_eventId] = EventStatus.Canceled;
