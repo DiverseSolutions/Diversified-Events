@@ -6,6 +6,7 @@ import { getOrganizerFactoryContract } from "../../contracts/OrganizerContractHe
 export default function OrganizerForm() {
   const [state, setState] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [disableLoaderBtn, setDisableLoaderBtn] = useState(false);
   const dispatch = useDispatch();
 
   function handleChange(e) {
@@ -14,6 +15,7 @@ export default function OrganizerForm() {
 
   async function createOrganizer() {
     try {
+      setDisableLoaderBtn(true);
       setLoading(true);
       let { organizerReadContract, organizerWriteContract } =
         await getOrganizerFactoryContract();
@@ -26,12 +28,13 @@ export default function OrganizerForm() {
       await tx.wait();
       dispatch(triggerSuccessAlert({ content: "Success Organizer NFT" }));
       setLoading(false);
+      setDisableLoaderBtn(false);
     } catch (err) {
       console.log("err: ", err);
     }
   }
 
-  console.log("loading: ", loading);
+  console.log("disableLoaderBtn: ", disableLoaderBtn);
 
   return (
     <div className='w-full'>
@@ -78,16 +81,27 @@ export default function OrganizerForm() {
                 onChange={handleChange}
               />
             </div>
-            <div className='w-full flex justify-center items-center rounded bg-blue-500 hover:bg-blue-600 cursor-pointer h-10 font-semibold text-white'>
+            <div
+              className={`w-full flex justify-center items-center rounded ${
+                disableLoaderBtn
+                  ? "bg-gray-500"
+                  : "bg-blue-500 hover:bg-blue-600"
+              } cursor-pointer h-10 font-semibold text-white`}
+            >
               <button
                 onClick={() => {
                   createOrganizer();
                 }}
                 className='flex items-center'
+                disabled={disableLoaderBtn ? true : false}
               >
                 {loading ? (
                   <svg
-                    class='inline mr-2 w-5 h-5 text-blue-400 animate-spin fill-white'
+                    className={`inline mr-2 w-5 h-5 ${
+                      disableLoaderBtn
+                        ? "fill-black"
+                        : "text-blue-400 fill-white"
+                    }  animate-spin `}
                     viewBox='0 0 100 101'
                     fill='none'
                     xmlns='http://www.w3.org/2000/svg'

@@ -1,1 +1,6 @@
-{"organizerFactory":"0x9c9eDEEeE1a584D16CE0529AE9cB1Fbad6bE1F1A","eventFactory":"0x34C467D48Fc9DcfAF1866C96F6bb28c86BeE4d91"}
+{
+  "organizerFactory": "0x76b552c586F771e223F246F43EAd81d1255A6b93",
+  "organizerNft": "0x8b73a69603812b9222e5144770F15ba62a5a7eCc",
+  "eventFactory": "0xf7B21C8741191dab6ebfb73F38bE1FBaC0B2460f"
+}
+

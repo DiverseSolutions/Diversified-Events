@@ -20,9 +20,9 @@ const Sidebar = () => {
         />
       </div>
       <div className='w-full h-[1px] bg-[#e5e7eb]'></div>
-      <div className='flex flex-col gap-2 text-md mt-4 w-full px-2 select-none'>
+      <div className='flex flex-col w-full px-2 mt-4 select-none gap-2 text-md'>
         <div
-          className='px-4 py-2 border-transparent rounded-lg hover:bg-blue-100 hover:text-blue-800 cursor-pointer flex gap-2 w-full items-center'
+          className='flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer hover:bg-blue-100 hover:text-blue-800 gap-2'
           onClick={() => navigate("/")}
         >
           <svg width='1.2em' height='1.2em' viewBox='0 0 24 24'>
@@ -35,7 +35,7 @@ const Sidebar = () => {
         </div>
         { !app.isOrganizer && (
           <div
-            className='px-4 py-2 border-transparent rounded-lg hover:bg-blue-100 hover:text-blue-800 cursor-pointer flex gap-2 w-full items-center'
+            className='flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer hover:bg-blue-100 hover:text-blue-800 gap-2'
             onClick={() => navigate("/organizer-form")}
           >
             <svg width='1.2em' height='1.2em' viewBox='0 0 24 24'>
@@ -47,8 +47,9 @@ const Sidebar = () => {
             <span>Become organizer</span>
           </div>
         ) }
+        { app.isOrganizer && (
         <div
-          className='px-4 py-2 border-transparent rounded-lg hover:bg-blue-100 hover:text-blue-800 cursor-pointer flex gap-2 w-full items-center'
+          className='flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer hover:bg-blue-100 hover:text-blue-800 gap-2'
           onClick={() => navigate("/mint-event")}
         >
           <svg width='1.2em' height='1.2em' viewBox='0 0 256 256'>
@@ -59,6 +60,7 @@ const Sidebar = () => {
           </svg>
           <span>Create event</span>
         </div>
+        ) }
       </div>
     </div>
   );

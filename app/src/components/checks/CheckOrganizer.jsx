@@ -1,12 +1,10 @@
-import { useState,useEffect } from 'react'
-import { useSelector,useDispatch } from 'react-redux';
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux';
 
 import { getOrganizerNftContract } from '../../../contracts/OrganizerNFTContractHelper.jsx';
 import { userIsOrganizer } from '../../slices/appSlice.jsx';
 
 export default function CheckOrganizer({ children }){
-  const app = useSelector((state) => state.app);
-  const metamask = useSelector((state) => state.metamask);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,12 +12,15 @@ export default function CheckOrganizer({ children }){
   },[])
 
   async function checkIfUserIsOrganizer(){
-    const { organizerNftReadContract } = await getOrganizerNftContract()
-    let balance = await organizerNftReadContract.balanceOf(metamask.selectedAccount)
-    console.log(balance.toNumber())
+    try{
+      const { organizerNftReadContract } = await getOrganizerNftContract()
+      let balance = await organizerNftReadContract.balanceOf(window.ethereum.selectedAddress)
 
-    if(balance.toNumber() > 0){
-      dispatch(userIsOrganizer())
+      if(balance.toNumber() > 0){
+        dispatch(userIsOrganizer())
+      }
+    }catch(e){
+      console.log(e)
     }
   }
 

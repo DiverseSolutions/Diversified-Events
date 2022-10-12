@@ -12,9 +12,13 @@ export default function HomePage() {
   }, []);
 
   async function getAllEventAddresses() {
-    const { eventFactoryReadContract } = await getEventFactoryContract();
-    let result = await eventFactoryReadContract.getAllEvents();
-    setEvents(result);
+    try{
+      const { eventFactoryReadContract } = await getEventFactoryContract();
+      let result = await eventFactoryReadContract.getAllEvents();
+      setEvents(result);
+    }catch(e){
+      console.log(e)
+    }
   }
 
   return (
