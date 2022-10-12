@@ -16,6 +16,7 @@ export default function CheckOrganizer({ children }){
   async function checkIfUserIsOrganizer(){
     const { organizerNftReadContract } = await getOrganizerNftContract()
     let balance = await organizerNftReadContract.balanceOf(metamask.selectedAccount)
+    console.log(balance.toNumber())
 
     if(balance.toNumber() > 0){
       dispatch(userIsOrganizer())
