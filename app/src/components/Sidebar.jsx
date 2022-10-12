@@ -21,6 +21,18 @@ const Sidebar = () => {
       <div className='flex flex-col gap-2 text-md mt-4 w-full px-2 select-none'>
         <div
           className='px-4 py-2 border-transparent rounded-lg hover:bg-blue-100 hover:text-blue-800 cursor-pointer flex gap-2 w-full items-center'
+          onClick={() => navigate("/")}
+        >
+          <svg width='1.2em' height='1.2em' viewBox='0 0 24 24'>
+            <path
+              fill='currentColor'
+              d='M10.95 18.35L7.4 14.8l1.45-1.45l2.1 2.1l4.2-4.2l1.45 1.45ZM5 22q-.825 0-1.413-.587Q3 20.825 3 20V6q0-.825.587-1.412Q4.175 4 5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588Q21 5.175 21 6v14q0 .825-.587 1.413Q19.825 22 19 22Zm0-2h14V10H5v10Z'
+            ></path>
+          </svg>
+          <span>All Events</span>
+        </div>
+        <div
+          className='px-4 py-2 border-transparent rounded-lg hover:bg-blue-100 hover:text-blue-800 cursor-pointer flex gap-2 w-full items-center'
           onClick={() => navigate("/organizer-form")}
         >
           <svg width='1.2em' height='1.2em' viewBox='0 0 24 24'>
