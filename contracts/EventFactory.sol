@@ -65,10 +65,6 @@ contract EventFactory is AccessControl {
     uint256 _tokenId = _tokenIdCounter.current();
     _tokenIdCounter.increment();
     
-    OrganizerDetail storage detail = organizerDetails[organizerFactory.addressToOrganizerId(msg.sender)];
-    
-    detail.eventIds.push(_tokenId);
-    
     normalEvent.createEvent(
       msg.sender,
       _tokenId,

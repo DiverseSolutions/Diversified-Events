@@ -43,7 +43,7 @@ contract NormalEvent {
 
     constructor(address _eventFactory) {
         eventFactory = EventFactory(_eventFactory);
-        normalEventNft = new NormalEventNFT(msg.sender);
+        normalEventNft = new NormalEventNFT(address(this));
         normalAccessNft = new NormalAccessNFT(msg.sender);
     }
 

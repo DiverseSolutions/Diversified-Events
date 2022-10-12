@@ -58,10 +58,10 @@ contract ReferrableEvent {
     constructor(address _eventFactory) {
         eventFactory = EventFactory(_eventFactory);
         
-        normalEventNft = new NormalEventNFT(msg.sender);
+        normalEventNft = new NormalEventNFT(address(this));
         referrableEventNft = new ReferrableEventNFT(msg.sender);
 
-        normalAccessNft = new NormalAccessNFT(msg.sender);
+        normalAccessNft = new NormalAccessNFT(address(this));
         referrableAccessNft = new ReferrableAccessNFT(msg.sender);
     }
 
