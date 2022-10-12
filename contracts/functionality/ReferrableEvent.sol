@@ -58,11 +58,11 @@ contract ReferrableEvent {
     constructor(address _eventFactory) {
         eventFactory = EventFactory(_eventFactory);
         
-        normalEventNft = new NormalEventNFT(address(this));
-        referrableEventNft = new ReferrableEventNFT(address(this));
+        normalEventNft = new NormalEventNFT(msg.sender);
+        referrableEventNft = new ReferrableEventNFT(msg.sender);
 
-        normalAccessNft = new NormalAccessNFT(address(this));
-        referrableAccessNft = new ReferrableAccessNFT(address(this));
+        normalAccessNft = new NormalAccessNFT(msg.sender);
+        referrableAccessNft = new ReferrableAccessNFT(msg.sender);
     }
 
     modifier onlyEventOwner(uint _eventId) {
@@ -74,12 +74,13 @@ contract ReferrableEvent {
     }
 
     function createEvent(
+        address _to,
         uint256 _eventId,
         EventDetails calldata _eventDetails,
         EventNormalNftDetails calldata _eventNormalNftDetails,
         EventReferrableNftDetails calldata _eventReferrableNftDetails
-    ) external onlyEventOwner(_eventId) {
-        referrableEventNft.eventMint(_eventId, msg.sender);
+    ) external {
+        referrableEventNft.eventMint(_eventId, _to);
 
         eventDetails.push(_eventDetails);
         eventNormalNftDetails.push(_eventNormalNftDetails);

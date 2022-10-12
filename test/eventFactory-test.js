@@ -30,7 +30,6 @@ describe("EventFactory - Functionality Test", function () {
   });
 
   it("checks event creation process Success/Failure", async function () {
-
     let blockNumber = await ethers.provider.getBlockNumber()
     let block = await ethers.provider.getBlock(blockNumber)
     let currentTimestamp = block.timestamp
@@ -59,40 +58,22 @@ describe("EventFactory - Functionality Test", function () {
 
     const referrableNftDetails = [referrableNftAllowed, referrableNftPrice, referrableNftDeadline, referrableNftLimit, referrableNftReferralLimit];
 
-
-    let txReferrable = await this.eventFactoryContract.connect(this.odko).createReferrableEvent(
+    await expect(this.eventFactoryContract.connect(this.odko).createReferrableEvent(
       eventDetails,
       normalNftDetails,
-      referrableNftDetails,
-    )
-    await txReferrable.wait();
-    
-    let emitedEventReferrable = await expect(txReferrable).to.emit(this.eventFactoryContract, "eventNFTMinted").withArgs(eventDetails, normalNftDetails, referrableNftDetails);
+      referrableNftDetails
+    )).to.emit(this.eventFactoryContract, 'EventCreated').withArgs(0, this.odko.address, true)
 
-    console.log(emitedEventReferrable)
-
-    let txNormal = await this.eventFactoryContract.connect(this.odko).createNormalEvent(
+    await expect(this.eventFactoryContract.connect(this.odko).createNormalEvent(
       eventDetails,
       normalNftDetails,
-    )
-    await txNormal.wait();
+    )).to.emit(this.eventFactoryContract, 'EventCreated').withArgs(1, this.odko.address, false)
 
-    let emitedEventNormal = await expect(txNormal).to.emit(this.eventFactoryContract, "eventNFTMinted").withArgs(eventDetails, normalNftDetails, referrableNftDetails);
-
-    console.log(emitedEventNormal)
-    
-    // let emitedEvent = await expect(tx).to.emit(this.eventFactoryContract, "eventNFTMinted").withArgs(eventDetails, normalNftDetails, referrableNftDetails);
-  
-
-    // eventDetails, normalNftDetails, referrableNftDetails
-
-    await expect(this.eventFactoryContract.connect(this.ireedui).createEvent(
+    await expect(this.eventFactoryContract.connect(this.ireedui).createNormalEvent(
       // event details
       [eventName, eventProfileUrl, eventDescription, eventLocation, eventDate, eventSocialLinks, eventAdmins],
       // normal nft details
-      [normalNftAllowed,normalNftPrice, normalNftDeadline, normalNftLimit],
-      // referrable nft details
-      [referrableNftAllowed, referrableNftPrice, referrableNftDeadline, referrableNftLimit, referrableNftReferralLimit],
+      [normalNftAllowed,normalNftPrice, normalNftDeadline, normalNftLimit]
     )).to.be.revertedWith("USER ISN'T ORGANIZER")
 
   });
