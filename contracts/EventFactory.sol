@@ -79,7 +79,9 @@ contract EventFactory is AccessControl {
     organizerAddressToOrganizerEvents[msg.sender].push(_tokenId);
     organizerAddressToOrganizerEventsLength[msg.sender]++;
     eventIdToOrganizerAddress[_tokenId] = msg.sender;
-    
+
+    events.push(_tokenId);
+
     emit EventCreated(_tokenId, msg.sender, false);
   }
 
@@ -104,6 +106,8 @@ contract EventFactory is AccessControl {
     organizerAddressToOrganizerEvents[msg.sender].push(_tokenId);
     organizerAddressToOrganizerEventsLength[msg.sender]++;
     eventIdToOrganizerAddress[_tokenId] = msg.sender;
+
+    events.push(_tokenId);
     
     emit EventCreated(_tokenId, msg.sender, true);
   }
@@ -112,12 +116,12 @@ contract EventFactory is AccessControl {
     return organizerAddressToOrganizerEvents[msg.sender];
   }
 
-  // function getAllEvents() external view returns(uint[] memory) {
-  //   return events;
-  // }
+  function getAllEvents() external view returns(uint[] memory) {
+    return events;
+  }
 
-  // function getEventsLength() external view returns(uint) {
-  //   return events.length;
-  // }
+  function getEventsLength() external view returns(uint) {
+    return events.length;
+  }
 
 }

@@ -10,12 +10,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/event-detail" element={<EventDetail />} />
-          <Route path="/my-events" element={<MyEvent />} />
-          <Route path="/organizer-form" element={<OrganizerForm />} />
-          <Route path="/mint-event" element={<MintEvent />} />
+        <Route path='/' element={<Layout />}>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/event-detail' element={<EventDetail />} />
+          <Route path='/my-events' element={<MyEvent />} />
+          <Route path='/organizer-form' element={<OrganizerForm />} />
+          <Route path='/mint-event' element={<MintEvent />} />
         </Route>
       </Routes>
     </BrowserRouter>

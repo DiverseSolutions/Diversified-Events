@@ -5,6 +5,8 @@
     "hardhat": "^2.11.2"
   },
   "dependencies": {
+    "@openzeppelin/contracts": "^4.7.3",
+    "dotenv": "^16.0.3",
     "hardhat-abi-exporter": "^2.10.0",
     "moment": "^2.29.4",
     "react-switch": "^7.0.0"
