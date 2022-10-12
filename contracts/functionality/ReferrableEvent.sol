@@ -113,7 +113,6 @@ contract ReferrableEvent {
         require(eventReferrableNftDetails[_eventId].referrableNftReferralLimit > (_users.length + referralCount[msg.sender]), "Referrable NFT limit reached");
 
         for (uint i = 0; i < _users.length; i++) {
-            referrableAccessNft.safeMint(_users[i]);
             referralCount[msg.sender]++;
             referredUsers[msg.sender].push(_users[i]);
         }
