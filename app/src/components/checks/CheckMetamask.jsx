@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { checkMetamask, checkConnected } from "../../slices/metamaskSlice";
+import { checkMetamask, checkConnected,connectMetamask } from "../../slices/metamaskSlice";
 import Metamask from "../../../assets/metamask.png";
 
 const CheckMetamask = ({ children }) => {
@@ -14,6 +14,10 @@ const CheckMetamask = ({ children }) => {
       dispatch(checkConnected());
     }, 1500);
   }, []);
+
+  useEffect(() => {
+    dispatch(connectMetamask())
+  },[metamask.isConnected])
 
   if (!metamask.haveMetamask) {
     return (
