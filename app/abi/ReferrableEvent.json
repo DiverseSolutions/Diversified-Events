@@ -467,6 +467,121 @@
         "type": "uint256"
       }
     ],
+    "name": "getEventAllDetails",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "eventName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "eventProfileUrl",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "eventDescription",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "eventLocation",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "eventDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "eventSocialLinks",
+            "type": "string"
+          },
+          {
+            "internalType": "address[]",
+            "name": "eventAdmins",
+            "type": "address[]"
+          }
+        ],
+        "internalType": "struct EventDetails",
+        "name": "",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          {
+            "internalType": "bool",
+            "name": "normalNftAllowed",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "normalNftPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "normalNftDeadline",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "normalNftLimit",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct EventNormalNftDetails",
+        "name": "",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          {
+            "internalType": "bool",
+            "name": "referrableNftAllowed",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "referrableNftPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "referrableNftDeadline",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "referrableNftLimit",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "referrableNftReferralLimit",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct EventReferrableNftDetails",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_eventId",
+        "type": "uint256"
+      }
+    ],
     "name": "getEventStatus",
     "outputs": [
       {

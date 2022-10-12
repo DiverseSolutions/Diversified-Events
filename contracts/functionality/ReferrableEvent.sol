@@ -136,4 +136,8 @@ contract ReferrableEvent {
     function getEventStatus (uint _eventId) public view returns (EventStatus) {
         return eventStatus[_eventId];
     }
+
+    function getEventAllDetails(uint _eventId) public view returns (EventDetails memory, EventNormalNftDetails memory, EventReferrableNftDetails memory) {
+        return (eventDetails[_eventId], eventNormalNftDetails[_eventId], eventReferrableNftDetails[_eventId]);
+    }
 }
