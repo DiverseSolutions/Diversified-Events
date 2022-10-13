@@ -1,72 +1,72 @@
-import { useEffect,useState } from 'react'
+import { useEffect, useState } from "react";
 
-export default function CheckNetwork({ children }){
-  const [isCorrectChain,setIsCorrectChain] = useState(false)
+export default function CheckNetwork({ children }) {
+  const [isCorrectChain, setIsCorrectChain] = useState(false);
 
   const klaytnNetwork = {
     testNet: 1001,
     main: 8217,
-  }
+  };
 
   useEffect(() => {
-    checkCorrectNetwork()
-  },[])
+    checkCorrectNetwork();
+  }, []);
 
-  async function checkCorrectNetwork(){
-    if(parseInt(ethereum.chainId) == klaytnNetwork.testNet){
-      setIsCorrectChain(true)
+  async function checkCorrectNetwork() {
+    if (parseInt(ethereum.chainId) == klaytnNetwork.testNet) {
+      setIsCorrectChain(true);
     }
   }
 
   async function handleConnectToChain() {
-    let hex = "0x" + klaytnNetwork.testNet.toString(16)
+    let hex = "0x" + klaytnNetwork.testNet.toString(16);
 
     try {
       await ethereum.request({
-        method: 'wallet_switchEthereumChain',
+        method: "wallet_switchEthereumChain",
         params: [{ chainId: hex }],
       });
     } catch (e) {
       try {
         await ethereum.request({
-          method: 'wallet_addEthereumChain',
+          method: "wallet_addEthereumChain",
           params: [
             {
               chainId: hex,
-              chainName: 'Klaytn Testnet Baobab',
+              chainName: "Klaytn Testnet Baobab",
               nativeCurrency: {
                 name: "KLAY",
                 symbol: "KLAY",
                 decimals: 18,
               },
-              blockExplorerUrls: ['https://scope.klaytn.com/'],
-              rpcUrls: ['https://api.baobab.klaytn.net:8651'],
+              blockExplorerUrls: ["https://scope.klaytn.com/"],
+              rpcUrls: ["https://api.baobab.klaytn.net:8651"],
             },
           ],
         });
       } catch (addError) {
-        console.log(addError) 
+        console.log(addError);
       }
-      console.log(e)
-    } 
+      console.log(e);
+    }
   }
 
-  if(!isCorrectChain){
+  if (!isCorrectChain) {
     return (
-      <div className="w-full gap-3 flex-col min-h-screen flex items-center justify-center text-black">
-        <h1 className="font-bold text-5xl">Wrong Network</h1>
-        <p className="text-md">Please connect to 
-
-        <span onClick={handleConnectToChain} className="ml-1 cursor-pointer text-green-600 font-bold hover:text-xl transition-all">
-          Klaytn TestNet
-        </span>
-
+      <div className='w-full gap-3 flex-col min-h-screen flex items-center justify-center text-black'>
+        <h1 className='font-bold text-5xl'>Wrong Network</h1>
+        <p className='text-md'>
+          Please connect to
+          <span
+            onClick={handleConnectToChain}
+            className='ml-1 cursor-pointer text-green-600 font-bold hover:text-xl transition-all'
+          >
+            Klaytn TestNet
+          </span>
         </p>
       </div>
-    )
+    );
   }
 
-  return (
-    <>{ children }</>
-  )
+  return <>{children}</>;
 }

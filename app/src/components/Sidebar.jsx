@@ -1,10 +1,11 @@
 import React from "react";
 import Logo from "../../assets/logo.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Sidebar = () => {
   let navigate = useNavigate();
+  const location = useLocation();
   const app = useSelector((state) => state.app);
 
   return (
@@ -22,7 +23,9 @@ const Sidebar = () => {
       <div className='w-full h-[1px] bg-[#e5e7eb]'></div>
       <div className='flex flex-col w-full px-2 mt-4 select-none gap-2 text-md'>
         <div
-          className='flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer hover:bg-blue-100 hover:text-blue-800 gap-2'
+          className={`flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer ${
+            location.pathname === "/" ? "bg-blue-100 text-blue-800" : ""
+          }  hover:bg-blue-100 hover:text-blue-800 gap-2`}
           onClick={() => navigate("/")}
         >
           <svg width='1.2em' height='1.2em' viewBox='0 0 24 24'>
@@ -35,7 +38,11 @@ const Sidebar = () => {
         </div>
         {!app.isOrganizer && (
           <div
-            className='flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer hover:bg-blue-100 hover:text-blue-800 gap-2'
+            className={`flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer ${
+              location.pathname === "/organizer-form"
+                ? "bg-blue-100 text-blue-800"
+                : ""
+            } hover:bg-blue-100 hover:text-blue-800 gap-2`}
             onClick={() => navigate("/organizer-form")}
           >
             <svg width='1.2em' height='1.2em' viewBox='0 0 24 24'>
@@ -50,7 +57,11 @@ const Sidebar = () => {
         {app.isOrganizer && (
           <>
             <div
-              className='flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer hover:bg-blue-100 hover:text-blue-800 gap-2'
+              className={`flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer ${
+                location.pathname === "/mint-event"
+                  ? "bg-blue-100 text-blue-800"
+                  : ""
+              }  hover:bg-blue-100 hover:text-blue-800 gap-2`}
               onClick={() => navigate("/mint-event")}
             >
               <svg width='1.2em' height='1.2em' viewBox='0 0 256 256'>
@@ -62,7 +73,11 @@ const Sidebar = () => {
               <span>Create event</span>
             </div>
             <div
-              className='flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer hover:bg-blue-100 hover:text-blue-800 gap-2'
+              className={`flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer ${
+                location.pathname === "/my-events"
+                  ? "bg-blue-100 text-blue-800"
+                  : ""
+              } hover:bg-blue-100 hover:text-blue-800 gap-2`}
               onClick={() => navigate("/my-events")}
             >
               <svg width='1.2em' height='1.2em' viewBox='0 0 24 24'>
@@ -76,7 +91,9 @@ const Sidebar = () => {
           </>
         )}
         <div
-          className='flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer hover:bg-blue-100 hover:text-blue-800 gap-2'
+          className={`flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer ${
+            location.pathname === "/my-nfts" ? "bg-blue-100 text-blue-800" : ""
+          } hover:bg-blue-100 hover:text-blue-800 gap-2`}
           onClick={() => navigate("/my-nfts")}
         >
           <svg width='1.2em' height='1.2em' viewBox='0 0 24 24'>
@@ -87,20 +104,23 @@ const Sidebar = () => {
           </svg>
           <span>My NFTs</span>
         </div>
-        {app.isOrganizer && (
-          <div
-            className='flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer hover:bg-blue-100 hover:text-blue-800 gap-2'
-            onClick={() => navigate("/verify-nfts")}
-          >
-            <svg width='1.2em' height='1.2em' viewBox='0 0 24 24'>
-              <path
-                fill='currentColor'
-                d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12c5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4l1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z'
-              ></path>
-            </svg>
-            <span>Verify NFTs</span>
-          </div>
-        )}
+
+        <div
+          className={`flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer ${
+            location.pathname === "/verify-nfts"
+              ? "bg-blue-100 text-blue-800"
+              : ""
+          } hover:bg-blue-100 hover:text-blue-800 gap-2`}
+          onClick={() => navigate("/verify-nfts")}
+        >
+          <svg width='1.2em' height='1.2em' viewBox='0 0 24 24'>
+            <path
+              fill='currentColor'
+              d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12c5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4l1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z'
+            ></path>
+          </svg>
+          <span>Verify NFTs</span>
+        </div>
       </div>
     </div>
   );
