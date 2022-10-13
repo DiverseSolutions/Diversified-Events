@@ -1,30 +1,21 @@
 import { useEffect, useState } from "react";
 
 export default function CheckNetwork({ children }) {
-  const [isCorrectChain, setIsCorrectChain] = useState(false);
+  const [isCorrectChain, setIsCorrectChain] = useState(true);
 
+  const klaytnNetwork = {
+    testNet: 1001,
+    main: 8217,
+  };
 
   useEffect(() => {
-    checkCorrectNetwork();
-  }, []);
-
-  function checkCorrectNetwork() {
-    let klaytnNetwork = {
-      testNet: 1001,
-      main: 8217,
-    };
-
-    if (parseInt(window.ethereum.chainId) == klaytnNetwork.testNet) {
-      setIsCorrectChain(true);
-    }
-  }
+    if (parseInt(window.ethereum.chainId) != klaytnNetwork) {
+      setIsCorrectChain(false)
+      handleConnectToChain()
+    } 
+   }, []);
 
   async function handleConnectToChain() {
-    let klaytnNetwork = {
-      testNet: 1001,
-      main: 8217,
-    };
-
     let hex = "0x" + klaytnNetwork.testNet.toString(16);
 
     try {
@@ -32,6 +23,7 @@ export default function CheckNetwork({ children }) {
         method: "wallet_switchEthereumChain",
         params: [{ chainId: hex }],
       });
+      setIsCorrectChain(true)
     } catch (e) {
       try {
         await ethereum.request({
@@ -50,6 +42,7 @@ export default function CheckNetwork({ children }) {
             },
           ],
         });
+        setIsCorrectChain(true)
       } catch (addError) {
         console.log(addError);
       }
