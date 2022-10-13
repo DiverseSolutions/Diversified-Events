@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import EventCardData from "../../dummyData/EventCardData";
-import Card from "../components/EventCard";
+import EventCard from "../components/EventCard";
 
 import { getEventContract } from "../../contracts/EventContractHelper";
 import { getEventFactoryContract } from "../../contracts/EventFactoryContractHelper.jsx";
 
 export default function HomePage() {
-  const [events, setEvents] = useState();
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     getAllEventAddresses();
@@ -68,9 +68,11 @@ export default function HomePage() {
     <div className='min-h-screen w-full flex justify-center mt-10'>
       <div className='flex max-w-5xl justify-center'>
         <div className='grid grid-cols-3 gap-3 w-full h-64'>
-          {events.map((data, index) => (
-            <Card key={index} data={data} />
-          ))}
+          {events.length > 0 &&
+            events.map((data, index) => {
+              if (data.eventDetails == undefined) return <></>;
+              return <EventCard key={index} data={data} />;
+            })}
         </div>
       </div>
     </div>

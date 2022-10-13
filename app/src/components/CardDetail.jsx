@@ -7,7 +7,7 @@ const CardDetail = ({ events }) => {
 
   return (
     <>
-      {events &&
+      {events.length > 0 &&
         events.map((data) => {
           return (
             <div className='flex flex-col w-full p-5 border rounded-2xl mt-4 gap-2 hover:border-black cursor-pointer'>

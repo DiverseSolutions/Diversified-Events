@@ -68,6 +68,10 @@ const MyEvent = () => {
 
   console.log("events: ", events);
 
+  if (organizerData == null) {
+    return <></>;
+  }
+
   return (
     <div className='flex w-full justify-center'>
       <div className='flex max-w-5xl w-full mt-10 gap-8'>
