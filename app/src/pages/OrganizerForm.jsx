@@ -23,11 +23,9 @@ export default function OrganizerForm() {
         );
         return "";
       }
-      console.log("ss: ", state.length === 0 ? "hooson" : "");
       setDisableLoaderBtn(true);
       setLoading(true);
-      let { organizerReadContract, organizerWriteContract } =
-        await getOrganizerFactoryContract();
+      let { organizerWriteContract } = await getOrganizerFactoryContract();
       const tx = await organizerWriteContract.createOrganizer(
         state._username,
         state._linkedIn,
@@ -102,7 +100,7 @@ export default function OrganizerForm() {
                 createOrganizer();
               }}
             >
-              <div
+              <button
                 className='flex items-center'
                 disabled={disableLoaderBtn ? true : false}
               >
@@ -130,7 +128,7 @@ export default function OrganizerForm() {
                   ""
                 )}
                 <span>Mint Event Organizer NFT</span>
-              </div>
+              </button>
             </div>
           </div>
         </div>
