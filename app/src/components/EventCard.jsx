@@ -2,13 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const Card = (props) => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { data } = props;
 
   return (
     <div
       className='flex flex-col justify-start text-center border rounded-2xl h-60 p-3 hover:border-black cursor-pointer select-none'
-      onClick={() => history("/event-detail")}
+      onClick={() => navigate("/event-detail")}
     >
       <div className='w-full flex justify-center'>
         <img

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { triggerSuccessAlert } from "../slices/alertSlice";
+import { useNavigate } from "react-router-dom";
+import { triggerSuccessAlert, triggerInfoAlert } from "../slices/alertSlice";
 import { getOrganizerFactoryContract } from "../../contracts/OrganizerContractHelper";
 
 export default function OrganizerForm() {
@@ -8,6 +9,7 @@ export default function OrganizerForm() {
   const [loading, setLoading] = useState(false);
   const [disableLoaderBtn, setDisableLoaderBtn] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function handleChange(e) {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -15,6 +17,13 @@ export default function OrganizerForm() {
 
   async function createOrganizer() {
     try {
+      if (state.length === 0) {
+        dispatch(
+          triggerInfoAlert({ content: "Enter your name, email and linkedIn" })
+        );
+        return "";
+      }
+      console.log("ss: ", state.length === 0 ? "hooson" : "");
       setDisableLoaderBtn(true);
       setLoading(true);
       let { organizerReadContract, organizerWriteContract } =
@@ -29,10 +38,14 @@ export default function OrganizerForm() {
       dispatch(triggerSuccessAlert({ content: "Success Organizer NFT" }));
       setLoading(false);
       setDisableLoaderBtn(false);
+      navigate("/");
+      navigate(0);
     } catch (err) {
       console.log("err: ", err);
     }
   }
+
+  console.log("state: ", state);
 
   return (
     <div className='w-full'>
@@ -85,11 +98,11 @@ export default function OrganizerForm() {
                   ? "bg-gray-500"
                   : "bg-blue-500 hover:bg-blue-600"
               } cursor-pointer h-10 font-semibold text-white`}
+              onClick={() => {
+                createOrganizer();
+              }}
             >
-              <button
-                onClick={() => {
-                  createOrganizer();
-                }}
+              <div
                 className='flex items-center'
                 disabled={disableLoaderBtn ? true : false}
               >
@@ -117,7 +130,7 @@ export default function OrganizerForm() {
                   ""
                 )}
                 <span>Mint Event Organizer NFT</span>
-              </button>
+              </div>
             </div>
           </div>
         </div>
