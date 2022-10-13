@@ -16,6 +16,7 @@ contract ReferrableNft is ERC721, AccessControl {
     }
 
     function mint(address to) external onlyRole(MINTER_ROLE){
+        require(balanceOf(to) == 0,"ALREADY HAS NFT");
         _safeMint(to, tokenId);
         tokenId += 1;
     }
