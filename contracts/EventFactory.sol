@@ -33,7 +33,7 @@ contract EventFactory is AccessControl {
     eventId = 1;
   }
 
-  function createNormalEvent(
+  function createEvent(
     EventDetails calldata _eventDetails,
     EventNftDetails calldata _eventNormalNftDetails
   ) isOrganizer() external {
@@ -46,10 +46,7 @@ contract EventFactory is AccessControl {
       _eventNormalNftDetails
     );
 
-    uint[] storage _organizerEventIds = addressToOrganizerEventIds[msg.sender];
-    _organizerEventIds.push(eventId);
-    addressToOrganizerEventIds[msg.sender] =  _organizerEventIds;
-
+    addressToOrganizerEventIds[msg.sender].push(eventId);
     eventIdToAddress[eventId] = address(_event);
 
     events.push(eventId);
@@ -59,6 +56,10 @@ contract EventFactory is AccessControl {
 
   function getOrganizerAllEvents() external view returns(uint[] memory){
     return addressToOrganizerEventIds[msg.sender];
+  }
+
+  function getOrganizerEvents(address _organizer) external view returns(uint[] memory){
+    return addressToOrganizerEventIds[_organizer];
   }
 
   function getAllEvents() external view returns(uint[] memory) {

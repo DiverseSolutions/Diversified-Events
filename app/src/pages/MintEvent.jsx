@@ -199,7 +199,7 @@ export default function MintEvent() {
     ]
 
     try {
-      let tx = await eventFactoryWriteContract.createNormalEvent(eventDetail,nftDetails)
+      let tx = await eventFactoryWriteContract.createEvent(eventDetail,nftDetails)
       await tx.wait()
 
       dispatch(

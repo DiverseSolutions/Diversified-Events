@@ -219,7 +219,7 @@
         "type": "tuple"
       }
     ],
-    "name": "createNormalEvent",
+    "name": "createEvent",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -304,6 +304,25 @@
   {
     "inputs": [],
     "name": "getOrganizerAllEvents",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_organizer",
+        "type": "address"
+      }
+    ],
+    "name": "getOrganizerEvents",
     "outputs": [
       {
         "internalType": "uint256[]",

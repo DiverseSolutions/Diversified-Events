@@ -3,9 +3,12 @@ import CardDetail from "../components/CardDetail";
 import { getOrganizerNftContract } from "../../contracts/OrganizerNFTContractHelper"
 import { getOrganizerFactoryContract } from "../../contracts/OrganizerContractHelper"
 import { getEventFactoryContract } from "../../contracts/EventFactoryContractHelper"
+import { getEventContract } from "../../contracts/EventContractHelper"
+import { logger } from "ethers";
 
 const MyEvent = () => {
   const [organizerData, setOrganizerData] = useState(null)
+  const [events, setEvents] = useState([])
 
   useEffect(() => {
     getOrganizerData()
@@ -18,16 +21,43 @@ const MyEvent = () => {
 
     let id = await organizerReadContract.addressToOrganizerId(ethereum.selectedAddress)
     let data = await organizerNftReadContract.getOrganizerDetail(id.toNumber())
-    console.log(data);
+    // console.log(data);
     setOrganizerData(data)
   }
 
   async function getOrganizerEvents() {
     const { eventFactoryReadContract } = await getEventFactoryContract();
-    let organizerEventIds = await eventFactoryReadContract.getOrganizerAllEvents()
-    let events = await eventFactoryReadContract.getAllEvents()
-    console.log(events);
-    console.log(organizerEventIds);
+    let organizerEventIds = await eventFactoryReadContract.getOrganizerEvents(ethereum.selectedAddress)
+
+    let eventDataArray = []
+
+    for(let id of organizerEventIds){
+      let eventAddress = null
+      
+      try {
+        eventAddress = await eventFactoryReadContract.eventIdToAddress(id.toNumber())
+      } catch (e) {
+       console.log(e); 
+      }
+
+      if(eventAddress != null){
+        const { eventReadContract } = await getEventContract(eventAddress)
+        let eventDetails = await eventReadContract.eventDetails()
+        let eventNftDetails = await eventReadContract.eventNftDetails()
+        let eventStatus = await eventReadContract.eventStatus()
+
+        let eventData = {
+          eventDetails,
+          eventNftDetails,
+          eventStatus,
+        }
+
+        eventDataArray.push(eventData)
+      }
+    }
+
+    // console.log(eventDataArray);
+    setEvents(eventDataArray)
   }
 
   return (
