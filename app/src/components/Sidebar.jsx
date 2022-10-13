@@ -61,6 +61,20 @@ const Sidebar = () => {
           <span>Create event</span>
         </div>
         ) }
+        { app.isOrganizer && (
+        <div
+          className='flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer hover:bg-blue-100 hover:text-blue-800 gap-2'
+          onClick={() => navigate("/my-events")}
+        >
+          <svg width='1.2em' height='1.2em' viewBox='0 0 256 256'>
+            <path
+              fill='currentColor'
+              d='M228 128a12 12 0 0 1-12 12h-76v76a12 12 0 0 1-24 0v-76H40a12 12 0 0 1 0-24h76V40a12 12 0 0 1 24 0v76h76a12 12 0 0 1 12 12Z'
+            ></path>
+          </svg>
+          <span>My Events</span>
+        </div>
+        ) }
       </div>
     </div>
   );

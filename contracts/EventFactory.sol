@@ -45,8 +45,11 @@ contract EventFactory is AccessControl {
       _eventDetails,
       _eventNormalNftDetails
     );
-    
-    addressToOrganizerEventIds[msg.sender].push(eventId);
+
+    uint[] storage _organizerEventIds = addressToOrganizerEventIds[msg.sender];
+    _organizerEventIds.push(eventId);
+    addressToOrganizerEventIds[msg.sender] =  _organizerEventIds;
+
     eventIdToAddress[eventId] = address(_event);
 
     events.push(eventId);

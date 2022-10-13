@@ -1,7 +1,35 @@
-import React from "react";
+import { useState,useEffect } from "react";
 import CardDetail from "../components/CardDetail";
+import { getOrganizerNftContract } from "../../contracts/OrganizerNFTContractHelper"
+import { getOrganizerFactoryContract } from "../../contracts/OrganizerContractHelper"
+import { getEventFactoryContract } from "../../contracts/EventFactoryContractHelper"
 
 const MyEvent = () => {
+  const [organizerData, setOrganizerData] = useState(null)
+
+  useEffect(() => {
+    getOrganizerData()
+    getOrganizerEvents()
+  },[])
+
+  async function getOrganizerData(){
+    const { organizerReadContract } = await getOrganizerFactoryContract();
+    const { organizerNftReadContract } = await getOrganizerNftContract();
+
+    let id = await organizerReadContract.addressToOrganizerId(ethereum.selectedAddress)
+    let data = await organizerNftReadContract.getOrganizerDetail(id.toNumber())
+    console.log(data);
+    setOrganizerData(data)
+  }
+
+  async function getOrganizerEvents() {
+    const { eventFactoryReadContract } = await getEventFactoryContract();
+    let organizerEventIds = await eventFactoryReadContract.getOrganizerAllEvents()
+    let events = await eventFactoryReadContract.getAllEvents()
+    console.log(events);
+    console.log(organizerEventIds);
+  }
+
   return (
     <div className="flex w-full justify-center">
       <div className="flex max-w-5xl w-full mt-10 gap-8">
