@@ -207,6 +207,11 @@
             "internalType": "uint256",
             "name": "limit",
             "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "referrableLimit",
+            "type": "uint256"
           }
         ],
         "internalType": "struct EventNftDetails",

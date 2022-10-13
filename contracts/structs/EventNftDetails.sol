@@ -5,4 +5,5 @@ struct EventNftDetails {
     uint price;
     uint deadline;
     uint limit;
+    uint referrableLimit;
 }

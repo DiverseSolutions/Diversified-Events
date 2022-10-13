@@ -194,7 +194,8 @@ export default function MintEvent() {
     let nftDetails = [
       parse18(parseFloat(state.referrableNftPrice)),
       moment(state.referrableNftDeadline).unix(),
-      parseInt(state.referrableNftLimit)
+      parseInt(state.referrableNftLimit),
+      parseInt(state.referrableNftReferralLimit)
     ]
 
     try {
