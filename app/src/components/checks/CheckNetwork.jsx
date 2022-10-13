@@ -3,22 +3,28 @@ import { useEffect, useState } from "react";
 export default function CheckNetwork({ children }) {
   const [isCorrectChain, setIsCorrectChain] = useState(false);
 
-  const klaytnNetwork = {
-    testNet: 1001,
-    main: 8217,
-  };
 
   useEffect(() => {
     checkCorrectNetwork();
   }, []);
 
-  async function checkCorrectNetwork() {
-    if (parseInt(ethereum.chainId) == klaytnNetwork.testNet) {
+  function checkCorrectNetwork() {
+    let klaytnNetwork = {
+      testNet: 1001,
+      main: 8217,
+    };
+
+    if (parseInt(window.ethereum.chainId) == klaytnNetwork.testNet) {
       setIsCorrectChain(true);
     }
   }
 
   async function handleConnectToChain() {
+    let klaytnNetwork = {
+      testNet: 1001,
+      main: 8217,
+    };
+
     let hex = "0x" + klaytnNetwork.testNet.toString(16);
 
     try {
