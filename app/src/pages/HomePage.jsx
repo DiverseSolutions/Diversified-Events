@@ -51,6 +51,8 @@ export default function HomePage() {
         let eventStatus = await eventReadContract.eventStatus();
 
         let eventData = {
+          id: id.toNumber(),
+          eventAddress,
           eventDetails,
           eventNftDetails,
           eventStatus,
