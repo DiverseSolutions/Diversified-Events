@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import EventCardData from "../../dummyData/EventCardData";
 import Card from "../components/EventCard";
+import moment from "moment";
 
 import { getEventContract } from "../../contracts/EventContractHelper";
 import { getEventFactoryContract } from "../../contracts/EventFactoryContractHelper.jsx";
@@ -59,8 +60,7 @@ export default function HomePage() {
         eventDataArray.push(eventData);
       }
     }
-
-    console.log(eventDataArray);
+    // console.log(eventDataArray);
     setEvents(eventDataArray);
   }
 
