@@ -8,6 +8,7 @@
     "@openzeppelin/contracts": "^4.7.3",
     "dotenv": "^16.0.3",
     "hardhat-abi-exporter": "^2.10.0",
+    "html5-qrcode": "^2.2.1",
     "moment": "^2.29.4",
     "react-switch": "^7.0.0"
   }
