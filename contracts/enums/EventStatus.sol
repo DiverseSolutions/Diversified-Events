@@ -3,7 +3,7 @@ pragma solidity ^0.8.4;
 
 // Started - 0
 // Ended - 1
-// Canceled - 3
+// Canceled - 2
 
 enum EventStatus {
   Started,
