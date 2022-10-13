@@ -6,10 +6,10 @@ import Navbar from "./Navbar";
 const Layout = () => {
   return (
     <div className='flex w-full'>
-      <div className='min-h-screen'>
+      <div className='hidden md:flex min-h-screen'>
         <Sidebar />
       </div>
-      <div className='flex flex-col w-full '>
+      <div className='flex flex-col w-full'>
         <Navbar />
         <Outlet />
       </div>

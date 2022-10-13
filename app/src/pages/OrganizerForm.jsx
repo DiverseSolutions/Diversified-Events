@@ -46,7 +46,7 @@ export default function OrganizerForm() {
   console.log("state: ", state);
 
   return (
-    <div className='w-full'>
+    <div className='w-full p-5 lg:p-3'>
       <div className='mt-10'>
         <div className='h-[7em] flex flex-col items-center justify-center font-body text-white space-y-6'>
           <span className='text-3xl font-bold text-black'>

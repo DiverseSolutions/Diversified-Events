@@ -28,17 +28,19 @@ export default function MintEvent() {
   }
 
   return (
-    <div className='w-full'>
+    <div className='w-full p-5 lg:p-3'>
       <div className='mt-10'>
-        <div className='h-[7em] flex flex-col items-center justify-center font-body text-white space-y-6'>
-          <span className='text-3xl font-bold text-black'>Create Event</span>
-          <p className='text-lg text-black'>
+        <div className='flex flex-col items-center justify-center font-body text-white space-y-6'>
+          <span className='flex text-center text-3xl font-bold text-black'>
+            Create Event
+          </span>
+          <span className='text-center text-lg text-black'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis,
             repellat.
-          </p>
+          </span>
         </div>
-        <div className='px-4 mx-auto xl:container xl:px-20 md:px-12 font-body'>
-          <div className='w-full p-6 mx-auto my-5 border sm:w-2/3 md:w-1/2 lg:w-2/5 rounded-2xl space-y-6'>
+        <div className='font-body'>
+          <div className='w-full p-6 mx-auto my-5 border rounded-2xl space-y-6 sm:w-4/5 lg:w-1/2'>
             <div className='space-y-2'>
               <p className='font-medium'>Enter your event name</p>
               <input

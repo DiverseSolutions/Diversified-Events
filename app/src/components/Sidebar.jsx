@@ -9,7 +9,10 @@ const Sidebar = () => {
   const app = useSelector((state) => state.app);
 
   return (
-    <div className='w-[240px] h-full border flex flex-col items-center cursor-pointer '>
+    <div
+      className='sm:w-[240px] h-full border flex flex-col items-center cursor-pointer '
+      aria-label='Sidebar'
+    >
       <div className='flex items-center justify-center w-full'>
         <img
           src={Logo}
