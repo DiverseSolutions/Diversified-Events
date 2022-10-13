@@ -42,7 +42,7 @@ const Navbar = () => {
               "Connect wallet"
             )}
           </button>
-          <div className='flex justify-center'>
+          <div className='justify-center hidden'>
             <Dropdown />
           </div>
         </div>
