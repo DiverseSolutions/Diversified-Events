@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ethers } from 'ethers';
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { triggerSuccessAlert } from "../slices/alertSlice";
@@ -17,9 +18,10 @@ const EventCard = (props) => {
     setDisableLoaderBtn(true);
     const { eventWriteContract } = await getEventContract(data.eventAddress);
     const accessNftDetails = await eventWriteContract.eventNftDetails();
-    const nftPrice = accessNftDetails.price;
+    const nftPriceBN = accessNftDetails.price;
+
     let tx = await eventWriteContract.mint({
-      value: nftPrice,
+      value: ethers.utils.parseEther(ethers.utils.formatUnits(nftPriceBN,18)),
     });
     await tx.wait();
     dispatch(triggerSuccessAlert({ content: "Success mint action" }));
