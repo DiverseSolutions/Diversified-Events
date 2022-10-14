@@ -53,13 +53,14 @@ export default function MintEvent() {
 
             <div className='space-y-2'>
               <p className='font-medium'>Enter your event description</p>
-              <input
-                type='text'
+              <textarea
+                name='eventDescription'
                 className='w-full h-12 px-3 border rounded focus:outline-none'
                 onChange={handleChange}
-                name='eventDescription'
                 placeholder='ArdMoney launchpad with community members'
-              />
+                rows='4'
+                cols='50'
+              ></textarea>
             </div>
 
             <div className='space-y-2'>
