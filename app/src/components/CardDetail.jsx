@@ -12,13 +12,15 @@ const CardDetail = ({ events }) => {
               className='flex flex-col w-full p-5 border rounded-2xl mt-4 gap-2 hover:border-black cursor-pointer'
               key={index}
             >
-              <span className='font-bold text-xl'>
+              <span className='font-bold text-xl text-center'>
                 {data.eventDetails.name}
               </span>
-              <span className='text-gray-700 font-medium'>
-                {data.eventDetails.description}
+              <span className='text-gray-700 font-medium text-center'>
+                {data.eventDetails?.description.length > 50
+                  ? data.eventDetails?.description.substring(0, 100) + "..."
+                  : "" ?? ""}
               </span>
-              <div className='w-full rounded-xl'>
+              <div className='flex justify-center w-full rounded-xl'>
                 <img
                   src={data.eventDetails.profile}
                   width='50%'
@@ -26,10 +28,10 @@ const CardDetail = ({ events }) => {
                   className='rounded-xl'
                 />
               </div>
-              <span className='text-gray-700 font-medium'>
+              <span className='text-gray-700 font-medium text-center'>
                 {data.eventDetails.socialLink}
               </span>
-              <div className='flex justify-between'>
+              <div className='flex text-center'>
                 <span>
                   <span className='font-semibold'>Date:</span>{" "}
                   {Date(data.eventDetails.date.toNumber() * 1000)}

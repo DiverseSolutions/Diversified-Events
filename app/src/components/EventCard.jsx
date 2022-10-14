@@ -43,12 +43,14 @@ const EventCard = (props) => {
           className='flex justify-center text-center rounded-2xl'
         />
       </div>
-      <div className='flex flex-col my-2'>
+      <div className='flex flex-col my-4'>
         <span className='font-medium text-lg'>
           {data.eventDetails?.name ?? ""}
         </span>
-        <span className='text-sm font-semibold'>
-          {data.eventDetails?.description ?? ""}
+        <span className='text-sm font-normal'>
+          {data.eventDetails?.description.length > 50
+            ? data.eventDetails?.description.substring(0, 100) + "..."
+            : "" ?? ""}
         </span>
       </div>
       <div className='flex flex-col gap-1'>

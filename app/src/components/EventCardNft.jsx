@@ -24,8 +24,10 @@ const EventCardNft = (props) => {
         <span className='font-medium text-lg'>
           {data.eventDetails?.name ?? ""}
         </span>
-        <span className='text-sm font-semibold'>
-          {data.eventDetails?.description ?? ""}
+        <span className='text-sm font-normal'>
+          {data.eventDetails?.description.length > 50
+            ? data.eventDetails?.description.substring(0, 100) + "..."
+            : "" ?? ""}
         </span>
       </div>
       <div className='flex flex-col gap-1'>
