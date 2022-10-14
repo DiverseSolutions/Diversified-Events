@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ethers } from 'ethers';
+import { ethers } from "ethers";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { triggerSuccessAlert } from "../slices/alertSlice";
@@ -21,7 +21,7 @@ const EventCard = (props) => {
     const nftPriceBN = accessNftDetails.price;
 
     let tx = await eventWriteContract.mint({
-      value: ethers.utils.parseEther(ethers.utils.formatUnits(nftPriceBN,18)),
+      value: ethers.utils.parseEther(ethers.utils.formatUnits(nftPriceBN, 18)),
     });
     await tx.wait();
     dispatch(triggerSuccessAlert({ content: "Success mint action" }));
@@ -30,40 +30,50 @@ const EventCard = (props) => {
   }
 
   return (
-    <div
-      className='flex flex-col justify-center text-center border rounded-2xl h-full p-5 cursor-pointer select-none'
-      key={index}
-    >
-      <div className='w-full flex justify-center'>
-        <img
-          src={data.eventDetails?.profile ?? ""}
-          width={"80px"}
-          height={"80px"}
-          alt='Event Image'
-          className='flex justify-center text-center rounded-2xl'
-        />
+    <div className='flex flex-col h-full border rounded-2xl p-5 justify-center'>
+      <div
+        className='flex flex-col justify-center text-center   h-full cursor-pointer select-none'
+        // onClick={() => navigate("/event-detail", { state: data })}
+        key={index}
+      >
+        <div className='w-full flex justify-center break-all'>
+          <img
+            src={data.eventDetails?.profile ?? ""}
+            width={"100%"}
+            alt='Event Image'
+            className='flex justify-center text-center rounded-2xl'
+          />
+        </div>
+        <div className='flex flex-col my-4'>
+          <span className='font-medium text-lg'>
+            {data.eventDetails?.name ?? ""}
+          </span>
+          <span className='text-sm font-normal'>
+            {data.eventDetails?.description.length > 50
+              ? data.eventDetails?.description.substring(0, 100) + "..."
+              : "" ?? ""}
+          </span>
+        </div>
+        <div className='flex flex-col gap-1 w-full'>
+          <span className='break-all'>
+            <span className='font-semibold'>Social Link: </span>
+            {data.eventDetails?.socialLink ?? ""}
+          </span>
+          <span>
+            <span className='font-semibold'>Date: </span>{" "}
+            {moment(data.eventDetails.date.toNumber() * 1000).format("lll")}
+          </span>
+          <span>
+            <span className='font-semibold'>Price: </span>
+            {ethers.utils.formatUnits(
+              data.eventNftDetails.price ?? "",
+              18
+            )}{" "}
+            KLAY
+          </span>
+        </div>
       </div>
-      <div className='flex flex-col my-4'>
-        <span className='font-medium text-lg'>
-          {data.eventDetails?.name ?? ""}
-        </span>
-        <span className='text-sm font-normal'>
-          {data.eventDetails?.description.length > 50
-            ? data.eventDetails?.description.substring(0, 100) + "..."
-            : "" ?? ""}
-        </span>
-      </div>
-      <div className='flex flex-col gap-1'>
-        <span>
-          <span className='font-semibold'>Social Link: </span>
-          {data.eventDetails?.socialLink ?? ""}
-        </span>
-        <span>
-          <span className='font-semibold'>Date: </span>{" "}
-          {moment(data.eventDetails.date.toNumber() * 1000).format("lll")}
-        </span>
-      </div>
-      <div className='flex justify-center mt-5 items-center'>
+      <div className='flex justify-center items-center mt-5'>
         <button
           className={`flex justify-center items-center rounded-lg px-4 ${
             disableLoaderBtn ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-600"

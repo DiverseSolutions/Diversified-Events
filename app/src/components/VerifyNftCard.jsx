@@ -30,9 +30,14 @@ const VerifyNftCard = ({ events }) => {
                   className='rounded-xl'
                 />
               </div>
-              <span className='text-gray-700 font-medium text-center'>
+              <a
+                className='text-gray-700 font-medium text-center'
+                href={data.eventDetails.socialLink}
+                target={"_blank"}
+              >
+                <span className='text-black'>Social Link: </span>
                 {data.eventDetails.socialLink}
-              </span>
+              </a>
               <div className='flex text-center'>
                 <span>
                   <span className='font-semibold'>Date:</span>{" "}

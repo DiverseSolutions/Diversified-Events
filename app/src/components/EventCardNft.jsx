@@ -13,8 +13,7 @@ const EventCardNft = (props) => {
       <div className='w-full flex justify-center'>
         <img
           src={data.eventDetails?.profile ?? ""}
-          width={"80px"}
-          height={"80px"}
+          width={"100%"}
           alt='Event Image'
           className='flex justify-center text-center rounded-2xl'
         />
