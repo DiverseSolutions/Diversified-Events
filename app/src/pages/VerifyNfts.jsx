@@ -62,8 +62,8 @@ export default function VerifyNfts() {
         eventDataArray.push(eventData);
       }
     }
-
     setEvents(eventDataArray);
+    console.log(eventDataArray);
   }
   return (
     <div className="min-h-screen w-full flex justify-center mt-10">
