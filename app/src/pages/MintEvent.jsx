@@ -129,7 +129,7 @@ export default function MintEvent() {
                   className='w-full h-12 px-3 border rounded focus:outline-none'
                   onChange={handleChange}
                   name='referrableNftPrice'
-                  placeholder='100 KLAY'
+                  placeholder='0.5 KLAY'
                 />
               </div>
 
