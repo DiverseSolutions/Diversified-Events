@@ -1,7 +1,4 @@
 import { useState, useEffect } from "react";
-import QRCode from "react-qr-code";
-
-import EventCardData from "../../dummyData/EventCardData";
 import EventCardNft from "../components/EventCardNft";
 
 import { getEventFactoryContract } from "../../contracts/EventFactoryContractHelper";

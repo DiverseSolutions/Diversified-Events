@@ -1,41 +1,27 @@
 import { useState, useEffect } from "react";
-import React from "react";
-import { getOrganizerNftContract } from "../../contracts/OrganizerNFTContractHelper";
-import { getOrganizerFactoryContract } from "../../contracts/OrganizerContractHelper";
-import { getEventFactoryContract } from "../../contracts/EventFactoryContractHelper";
-import { getEventContract } from "../../contracts/EventContractHelper";
 import VerifyNftCard from "../components/VerifyNftCard";
 import EventCardData from "../../dummyData/EventCardData";
 
+import { getEventFactoryContract } from "../../contracts/EventFactoryContractHelper";
+import { getEventContract } from "../../contracts/EventContractHelper";
+import { getNftContract } from "../../contracts/NftContractHelper";
+
 export default function VerifyNfts() {
-  const [organizerData, setOrganizerData] = useState(null);
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    getOrganizerData();
-    getOrganizerEvents();
+    getUserNfts();
   }, []);
 
-  async function getOrganizerData() {
-    const { organizerReadContract } = await getOrganizerFactoryContract();
-    const { organizerNftReadContract } = await getOrganizerNftContract();
+  async function getUserNfts() {
+    const userAddress = ethereum.selectedAddress;
 
-    let id = await organizerReadContract.addressToOrganizerId(
-      ethereum.selectedAddress
-    );
-    let data = await organizerNftReadContract.getOrganizerDetail(id.toNumber());
-    setOrganizerData(data);
-  }
-
-  async function getOrganizerEvents() {
     const { eventFactoryReadContract } = await getEventFactoryContract();
-    let organizerEventIds = await eventFactoryReadContract.getOrganizerEvents(
-      ethereum.selectedAddress
-    );
+    let eventIds = await eventFactoryReadContract.getAllEvents();
 
     let eventDataArray = [];
 
-    for (let id of organizerEventIds) {
+    for (let id of eventIds) {
       let eventAddress = null;
 
       try {
@@ -48,23 +34,32 @@ export default function VerifyNfts() {
 
       if (eventAddress != null) {
         const { eventReadContract } = await getEventContract(eventAddress);
-        let eventDetails = await eventReadContract.eventDetails();
-        let eventNftDetails = await eventReadContract.eventNftDetails();
-        let eventStatus = await eventReadContract.eventStatus();
+        let nftAddress = await eventReadContract.nft();
+        const { nftReadContract } = await getNftContract(nftAddress)
+        let balanceBN = await nftReadContract.balanceOf(userAddress)
 
-        let eventData = {
-          id: id.toNumber(),
-          eventDetails,
-          eventNftDetails,
-          eventStatus,
-        };
+        if(balanceBN.toNumber() > 0 ){
+          let eventDetails = await eventReadContract.eventDetails();
+          let eventNftDetails = await eventReadContract.eventNftDetails();
+          let eventStatus = await eventReadContract.eventStatus();
 
-        eventDataArray.push(eventData);
+          let eventData = {
+            id: id.toNumber(),
+            eventDetails,
+            eventNftDetails,
+            eventStatus,
+          };
+
+          eventDataArray.push(eventData);
+        }
+
       }
     }
+
+    console.log(eventDataArray)
     setEvents(eventDataArray);
-    console.log(eventDataArray);
   }
+
   return (
     <div className="min-h-screen w-full flex justify-center mt-10">
       <div className="flex max-w-5xl justify-center">

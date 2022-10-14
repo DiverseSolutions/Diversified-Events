@@ -108,22 +108,24 @@ const Sidebar = () => {
           <span>My NFTs</span>
         </div>
 
-        <div
-          className={`flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer ${
-            location.pathname === "/verify-nfts"
-              ? "bg-blue-100 text-blue-800"
-              : ""
-          } hover:bg-blue-100 hover:text-blue-800 gap-2`}
-          onClick={() => navigate("/verify-nfts")}
-        >
-          <svg width='1.2em' height='1.2em' viewBox='0 0 24 24'>
-            <path
-              fill='currentColor'
-              d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12c5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4l1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z'
-            ></path>
-          </svg>
-          <span>Verify NFTs</span>
-        </div>
+        {app.isOrganizer && (
+          <div
+            className={`flex items-center w-full px-4 py-2 border-transparent rounded-lg cursor-pointer ${
+              location.pathname === "/verify-nfts"
+                ? "bg-blue-100 text-blue-800"
+                : ""
+            } hover:bg-blue-100 hover:text-blue-800 gap-2`}
+            onClick={() => navigate("/verify-nfts")}
+          >
+            <svg width='1.2em' height='1.2em' viewBox='0 0 24 24'>
+              <path
+                fill='currentColor'
+                d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12c5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4l1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z'
+              ></path>
+            </svg>
+            <span>Verify NFTs</span>
+          </div>
+        )}
       </div>
     </div>
   );
