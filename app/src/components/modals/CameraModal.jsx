@@ -32,17 +32,23 @@ export default function CameraModal() {
       }
 
       if(parseInt(eventId) == parseInt(capturedEventId)) {
-        const { eventFactoryReadContract } = await getEventFactoryContract();
-        let eventAddress = await eventFactoryReadContract.eventIdToAddress(
-          parseInt(capturedEventId)
-        );
-        const { eventReadContract } = await getEventContract(eventAddress);
-        let nftAddress = await eventReadContract.nft();
-        const { nftReadContract } = await getNftContract(nftAddress);
-        let balanceBN = await nftReadContract.balanceOf(userAddress);
+        try{
+          const { eventFactoryReadContract } = await getEventFactoryContract();
+          let eventAddress = await eventFactoryReadContract.eventIdToAddress(
+            parseInt(capturedEventId)
+          );
+          const { eventReadContract } = await getEventContract(eventAddress);
+          let nftAddress = await eventReadContract.nft();
+          const { nftReadContract } = await getNftContract(nftAddress);
+          let balanceBN = await nftReadContract.balanceOf(userAddress);
 
-        if(balanceBN.toNumber() > 0){
-          dispatch(triggerSuccessAlert({content: "Event Access Approved"}));
+          if(balanceBN.toNumber() > 0){
+            dispatch(triggerSuccessAlert({content: "Event Access Approved"}));
+          }else{
+            dispatch(triggerSuccessAlert({content: "User Doesn't Have Nft"}));
+          }
+        }catch(e){
+          alert(e)
         }
       }else{
         dispatch(triggerErrorAlert({content: "Event Access Disapproved"}));
