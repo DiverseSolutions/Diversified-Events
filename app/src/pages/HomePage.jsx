@@ -89,11 +89,16 @@ export default function HomePage() {
           </svg>
         ) : (
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 w-full h-64 mb-10'>
-            {events.length > 0 &&
+            {events.length > 0 ? (
               events.map((data, index) => {
                 if (data.eventDetails == undefined) return <></>;
                 return <EventCard key={index} data={data} />;
-              })}
+              })
+            ) : (
+              <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+                <span className='text-center'>There are no events yet...</span>
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -66,13 +66,8 @@ const VerifyNftCard = (props) => {
       }
     }
 
-    console.log(eventDataArray);
     setEvents(eventDataArray);
   }
-
-  console.log("events: ", events);
-
-  // console.log("modal: ", modal);
 
   return (
     <div className='flex flex-col justify-center text-center border rounded-2xl min-h-60 p-3 hover:border-black cursor-pointer select-none'>

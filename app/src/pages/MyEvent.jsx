@@ -23,7 +23,6 @@ const MyEvent = () => {
       ethereum.selectedAddress
     );
     let data = await organizerNftReadContract.getOrganizerDetail(id.toNumber());
-    console.log(data);
     setOrganizerData(data);
   }
 
@@ -66,8 +65,6 @@ const MyEvent = () => {
     setEvents(eventDataArray);
   }
 
-  console.log("events: ", events);
-
   if (organizerData == null) {
     return <></>;
   }
@@ -107,7 +104,9 @@ const MyEvent = () => {
               </svg>
             </button>
           </div>
-          <CardDetail events={events} />
+          <div className='grid lg:grid-cols-2 gap-3'>
+            <CardDetail events={events} />
+          </div>
         </div>
       </div>
     </div>

@@ -43,8 +43,6 @@ export default function OrganizerForm() {
     }
   }
 
-  console.log("state: ", state);
-
   return (
     <div className='w-full p-5 lg:p-3'>
       <div className='mt-10'>
