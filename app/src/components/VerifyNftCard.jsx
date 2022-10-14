@@ -14,7 +14,7 @@ const VerifyNftCard = ({ events }) => {
               className='flex flex-col w-full p-5 border rounded-2xl mt-4 gap-2 hover:border-black cursor-pointer'
               key={index}
             >
-              <span className='font-bold text-xl text-center'>
+              <span className='font-bold text-xl text-center break-all'>
                 {data.eventDetails.name}
               </span>
               <span className='text-gray-700 font-medium text-center'>
@@ -31,16 +31,16 @@ const VerifyNftCard = ({ events }) => {
                 />
               </div>
               <a
-                className='text-gray-700 font-medium text-center'
+                className='text-gray-700 font-medium text-center break-all'
                 href={data.eventDetails.socialLink}
                 target={"_blank"}
               >
-                <span className='text-black'>Social Link: </span>
+                <span className='text-black break-all'>Social Link: </span>
                 {data.eventDetails.socialLink}
               </a>
               <div className='flex text-center'>
                 <span>
-                  <span className='font-semibold'>Date:</span>{" "}
+                  <span className='font-semibold break-all'>Date:</span>{" "}
                   {Date(data.eventDetails.date.toNumber() * 1000)}
                 </span>
               </div>

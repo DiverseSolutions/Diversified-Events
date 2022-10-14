@@ -74,7 +74,7 @@ const MyEvent = () => {
 
   return (
     <div className='flex w-full justify-center p-5 lg:p-3'>
-      <div className='flex flex-col sm:flex-row max-w-5xl w-full mt-10 gap-8'>
+      <div className='flex flex-col sm:flex-row max-w-5xl w-full mt-0 lg:mt-5 gap-8'>
         {loading ? (
           <div className='flex w-full justify-center'>
             <svg

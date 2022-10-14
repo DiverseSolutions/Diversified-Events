@@ -58,9 +58,9 @@ export default function VerifyNfts() {
   }
 
   return (
-    <div className='min-h-screen w-full flex justify-center mt-10'>
+    <div className='min-h-screen w-full flex justify-center mt-0 sm:mt-2 lg:mt-5'>
       <div className='flex max-w-5xl justify-center'>
-        <div className='grid grid-cols-1 sm:grid-cols-3 gap-3 w-full h-64'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-3 w-full h-64 '>
           {loading ? (
             <svg
               className='inline mr-2 w-14 h-14 animate-spin dark:text-gray-200 fill-blue-600'
@@ -79,7 +79,9 @@ export default function VerifyNfts() {
             </svg>
           ) : (
             events.map((data, index) => (
-              <VerifyNftCard key={index} events={events} />
+              <div className='flex flex-col m-5'>
+                <VerifyNftCard key={index} events={events} />
+              </div>
             ))
           )}
         </div>

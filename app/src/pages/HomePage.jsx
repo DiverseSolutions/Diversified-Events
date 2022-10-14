@@ -73,7 +73,7 @@ export default function HomePage() {
   console.log("events: ", events);
 
   return (
-    <div className='min-h-screen w-full flex justify-center mt-10 p-5 lg:p-3'>
+    <div className='min-h-screen w-full flex justify-center mt-0 lg:mt-5 p-5 lg:p-3'>
       <div className='flex max-w-5xl justify-center '>
         {loading ? (
           <div className='flex w-full justify-center'>

@@ -29,7 +29,7 @@ export default function MintEvent() {
 
   return (
     <div className='w-full p-5 lg:p-3'>
-      <div className='mt-10'>
+      <div className='mt-0 lg:mt-5'>
         <div className='flex flex-col items-center justify-center font-body text-white space-y-6'>
           <span className='flex text-center text-3xl font-bold text-black'>
             Create Event

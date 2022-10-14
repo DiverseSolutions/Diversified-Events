@@ -1,5 +1,6 @@
 import React from "react";
 import { ethers } from "ethers";
+import moment from "moment";
 
 const CardDetail = ({ events }) => {
   return (
@@ -19,10 +20,10 @@ const CardDetail = ({ events }) => {
                   className='rounded-xl'
                 />
               </div>
-              <span className='font-bold text-xl text-center'>
+              <span className='font-bold text-xl text-center break-all'>
                 {data.eventDetails.name}
               </span>
-              <span className='text-gray-700 font-medium text-center'>
+              <span className='text-gray-700 font-medium text-center '>
                 {data.eventDetails?.description.length > 50
                   ? data.eventDetails?.description.substring(0, 100) + "..."
                   : "" ?? ""}
@@ -33,15 +34,13 @@ const CardDetail = ({ events }) => {
                 href={data.eventDetails.socialLink}
                 target={"_blank"}
               >
-                <span className='text-black'>Social Link: </span>
+                <span className='text-black break-all'>Social Link: </span>
                 {data.eventDetails.socialLink}
               </a>
 
-              <div className='flex text-center'>
-                <span>
-                  <span className='font-semibold'>Date:</span>{" "}
-                  {Date(data.eventDetails.date.toNumber() * 1000)}
-                </span>
+              <div className='flex justify-center w-full break-all'>
+                <span className='font-semibold'>Date:</span>{" "}
+                {moment(data.eventDetails.date.toNumber() * 1000).format("lll")}
               </div>
               <span className='text-center mt-2'>
                 <span className='font-semibold'>Price: </span>

@@ -11,11 +11,8 @@ export default function QrReaderModal() {
   return (
     <div className='absolute flex w-full h-full justify-center items-center bg-black bg-opacity-40'>
       <div className='flex justify-center items-center relative border bg-white flex-col z-50 max-w-3xl w-[400px] p-6 rounded-3xl'>
-        <div className='grid grid-cols-7 w-full justify-between'>
-          <div className='col-span-1'></div>
-          <span className='text-xl font-bold col-span-4 col-start-3'>
-            My QR
-          </span>
+        <div className='flex w-full justify-between'>
+          <span className='text-xl font-bold'>My QR</span>
           <div className='flex justify-end '>
             <svg
               width='1.5em'
@@ -37,7 +34,9 @@ export default function QrReaderModal() {
           <QRCode
             size={256}
             style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-            value={modal && `${modal.qrData.toString()},${ethereum.selectedAddress}`}
+            value={
+              modal && `${modal.qrData.toString()},${ethereum.selectedAddress}`
+            }
             viewBox={`0 0 256 256`}
           />
         </div>

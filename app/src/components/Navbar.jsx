@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,11 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const metamask = useSelector((state) => state.metamask);
-  const app = useSelector((state) => state.app);
+  const modal = useSelector((state) => state.modal);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [modal.showCameraModal, modal.showQrModal]);
 
   return (
     <div className='flex flex-col md:flex-row h-[70px] justify-center items-center border-b border-t w-full'>
@@ -35,7 +39,12 @@ const Navbar = () => {
             Diversified Events
           </span>
         </div>
-        <div className='md:hidden' onClick={() => setOpen(!open)}>
+        <div
+          className='md:hidden'
+          onClick={() => {
+            setOpen(!open);
+          }}
+        >
           <svg width='2em' height='2em' viewBox='0 0 24 24'>
             <path
               fill='currentColor'
@@ -69,20 +78,10 @@ const Navbar = () => {
               "Connect wallet"
             )}
           </button>
-          {metamask && metamask.isConnected ? (
-            <button
-              className='text-blue-500'
-              onClick={() => dispatch(disconnectMetamask())}
-            >
-              Log out
-            </button>
-          ) : (
-            ""
-          )}
 
-          <div className='justify-center hidden'>
+          {/* <div className='justify-center hidden'>
             <Dropdown />
-          </div>
+          </div> */}
         </div>
       </div>
 

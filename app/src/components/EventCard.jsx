@@ -32,7 +32,7 @@ const EventCard = (props) => {
   return (
     <div className='flex flex-col h-full border rounded-2xl p-5 justify-center'>
       <div
-        className='flex flex-col justify-center text-center   h-full cursor-pointer select-none'
+        className='flex flex-col justify-center text-center h-full'
         // onClick={() => navigate("/event-detail", { state: data })}
         key={index}
       >
@@ -45,7 +45,7 @@ const EventCard = (props) => {
           />
         </div>
         <div className='flex flex-col my-4'>
-          <span className='font-medium text-lg'>
+          <span className='font-medium text-lg break-all'>
             {data.eventDetails?.name ?? ""}
           </span>
           <span className='text-sm font-normal'>
@@ -55,16 +55,20 @@ const EventCard = (props) => {
           </span>
         </div>
         <div className='flex flex-col gap-1 w-full'>
-          <span className='break-all'>
-            <span className='font-semibold'>Social Link: </span>
-            {data.eventDetails?.socialLink ?? ""}
-          </span>
+          <a
+            className='text-gray-700 font-medium text-center break-all'
+            href={data.eventDetails.socialLink}
+            target={"_blank"}
+          >
+            <span className='text-black'>Social Link: </span>
+            {data.eventDetails.socialLink}
+          </a>
           <span>
-            <span className='font-semibold'>Date: </span>{" "}
+            <span className='font-semibold break-all'>Date: </span>{" "}
             {moment(data.eventDetails.date.toNumber() * 1000).format("lll")}
           </span>
           <span>
-            <span className='font-semibold'>Price: </span>
+            <span className='font-semibold break-all'>Price: </span>
             {ethers.utils.formatUnits(
               data.eventNftDetails.price ?? "",
               18

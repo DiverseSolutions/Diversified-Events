@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { connectMetamask } from "../slices/metamaskSlice";
+import { connectMetamask } from "../../slices/metamaskSlice";
 
 const MobileNavbar = (props) => {
   const { setOpen } = props;
