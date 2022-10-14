@@ -23,7 +23,7 @@ export default function CameraModal() {
 
     const qrCodeSuccessCallback = async (decodedText, decodedResult) => {
       let eventId = modal.cameraData
-      let [capturedEventId,userAddress] = decodedText.split[',']
+      let [capturedEventId,userAddress] = decodedText.split(',')
 
       if(isNaN(capturedEventId)){
         dispatch(triggerErrorAlert({content: "Not Event QR"}));
