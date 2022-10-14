@@ -48,7 +48,7 @@ const Navbar = () => {
 
         <div className='hidden md:flex items-center gap-2'>
           <button
-            className='flex gap-2 items-center px-5 py-3 border rounded-3xl hover:border-black text-gray-500 font-semibold'
+            className='flex gap-2 items-center px-5 py-2 border rounded-3xl hover:border-black text-gray-500 font-semibold'
             onClick={() => {
               if (!metamask.isConnected) dispatch(showConnectWalletModal());
             }}
