@@ -1,11 +1,18 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Html5Qrcode } from "html5-qrcode";
 
+import { getEventFactoryContract } from '../../../contracts/EventFactoryContractHelper';
+import { getEventContract } from "../../../contracts/EventContractHelper";
+import { getNftContract } from "../../../contracts/NftContractHelper";
+
 import { hideCameraModal } from "../../slices/modalSlice";
+import { triggerSuccessAlert,triggerErrorAlert } from "../../slices/alertSlice";
 
 export default function CameraModal() {
   const dispatch = useDispatch();
+  const [qr,setQr] = useState(null)
+  const modal = useSelector((state) => state.modal);
 
   useEffect(() => {
     onVerifyBtn();
@@ -13,10 +20,37 @@ export default function CameraModal() {
 
   async function onVerifyBtn() {
     const html5QrCode = new Html5Qrcode("qrScanner");
-    const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-      /* handle success */
-      alert(decodedText);
+
+    const qrCodeSuccessCallback = async (decodedText, decodedResult) => {
+      let eventId = modal.cameraData
+      let capturedEventId = decodedText
+      let userAddress = ethereum.selectedAddress
+
+      if(isNaN(capturedEventId)){
+        dispatch(triggerErrorAlert({content: "Not Event QR"}));
+        return;
+      }
+
+      if(parseInt(eventId) == parseInt(capturedEventId)) {
+        const { eventFactoryReadContract } = await getEventFactoryContract();
+        let eventAddress = await eventFactoryReadContract.eventIdToAddress(
+          parseInt(capturedEventId)
+        );
+        const { eventReadContract } = await getEventContract(eventAddress);
+        let nftAddress = await eventReadContract.nft();
+        const { nftReadContract } = await getNftContract(nftAddress);
+        let balanceBN = await nftReadContract.balanceOf(userAddress);
+
+        if(balanceBN.toNumber() > 0){
+          dispatch(triggerSuccessAlert({content: "Event Access Approved"}));
+        }
+      }else{
+        dispatch(triggerErrorAlert({content: "Event Access Disapproved"}));
+        return;
+      }
+
     };
+
     const config = { fps: 10, qrbox: { width: 250, height: 250 } };
 
     // If you want to prefer front camera
@@ -25,6 +59,13 @@ export default function CameraModal() {
       config,
       qrCodeSuccessCallback
     );
+
+    setQr(html5QrCode)
+  }
+
+  async function handleCloseQr(){
+    await qr.stop();
+    dispatch(hideCameraModal());
   }
 
   return (
@@ -38,9 +79,9 @@ export default function CameraModal() {
               height='1.5em'
               viewBox='0 0 15 15'
               onClick={() => {
-                dispatch(hideCameraModal());
+                handleCloseQr()
               }}
-              className='col-span-1 flex justify-items-end justify-evenly just'
+              className='cursor-pointer col-span-1 flex justify-items-end justify-evenly just'
             >
               <path
                 fill='currentColor'
@@ -54,6 +95,7 @@ export default function CameraModal() {
         <div className='flex flex-col gap-2 w-full justify-center text-center mt-8'>
           <div id='qrScanner' width='1000px' height='1000px'></div>
         </div>
+        <button className="w-full mt-2 py-3 uppercase border-2 rounded-xl" onClick={handleCloseQr}>Close</button>
       </div>
     </div>
   );

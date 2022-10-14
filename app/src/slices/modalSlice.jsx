@@ -6,6 +6,7 @@ const modalSlice = createSlice({
     showConnectWalletModal: false,
     showQrModal: false,
     showCameraModal: false,
+    cameraData: null,
     qrData: null,
   },
   reducers: {
@@ -22,8 +23,10 @@ const modalSlice = createSlice({
     hideQrModal: (state) => {
       state.showQrModal = false;
     },
-    showCameraModal: (state) => {
+    showCameraModal: (state,action) => {
       state.showCameraModal = true;
+      console.log(action)
+      state.cameraData = action.payload;
     },
     hideCameraModal: (state) => {
       state.showCameraModal = false;

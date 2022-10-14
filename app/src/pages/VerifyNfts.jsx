@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import VerifyNftCard from "../components/VerifyNftCard";
-import EventCardData from "../../dummyData/EventCardData";
 
 import { getEventFactoryContract } from "../../contracts/EventFactoryContractHelper";
 import { getEventContract } from "../../contracts/EventContractHelper";
-import { getNftContract } from "../../contracts/NftContractHelper";
 
 export default function VerifyNfts() {
   const [events, setEvents] = useState([]);
@@ -34,11 +32,9 @@ export default function VerifyNfts() {
 
       if (eventAddress != null) {
         const { eventReadContract } = await getEventContract(eventAddress);
-        let nftAddress = await eventReadContract.nft();
-        const { nftReadContract } = await getNftContract(nftAddress);
-        let balanceBN = await nftReadContract.balanceOf(userAddress);
+        let organizerAddress = await eventReadContract.organizer();
 
-        if (balanceBN.toNumber() > 0) {
+        if (organizerAddress.toUpperCase() == userAddress.toUpperCase()) {
           let eventDetails = await eventReadContract.eventDetails();
           let eventNftDetails = await eventReadContract.eventNftDetails();
           let eventStatus = await eventReadContract.eventStatus();
@@ -58,8 +54,6 @@ export default function VerifyNfts() {
     console.log(eventDataArray);
     setEvents(eventDataArray);
   }
-
-  console.log("events: ", events);
 
   return (
     <div className='min-h-screen w-full flex justify-center mt-10'>

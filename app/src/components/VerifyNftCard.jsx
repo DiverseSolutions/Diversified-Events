@@ -4,7 +4,6 @@ import { showCameraModal } from "../slices/modalSlice";
 
 const VerifyNftCard = ({ events }) => {
   const dispatch = useDispatch();
-  // const modal = useSelector((state = state.modal));
 
   return (
     <>
@@ -43,7 +42,7 @@ const VerifyNftCard = ({ events }) => {
               <div className='flex justify-center mt-8 items-center'>
                 <button
                   className='flex justify-center px-10 py-1 border rounded-3xl hover:border-black'
-                  onClick={() => dispatch(showCameraModal())}
+                  onClick={() => dispatch(showCameraModal(data.id))}
                 >
                   Verify
                 </button>
