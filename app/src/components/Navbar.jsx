@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { showConnectWalletModal } from "../slices/modalSlice";
 import { disconnectMetamask } from "../slices/metamaskSlice";
 import MobileNavbar from "./MobileNavbar";
+import Logo1 from "../../assets/Diversified.jpeg";
 
 import Dropdown from "./Dropdown";
 import Logo from "../../assets/logo.png";
@@ -23,9 +24,9 @@ const Navbar = () => {
   return (
     <div className='flex flex-col md:flex-row h-[70px] justify-center items-center border-b border-t w-full'>
       <div className='flex items-center justify-between px-3 sm:px-8 lg:5 xl:px-1 max-w-5xl w-full'>
-        <div className='flex items-center gap-3 select-none'>
+        <div className='flex items-center gap-1 select-none'>
           <img
-            src={Logo}
+            src={Logo1}
             width={"40px"}
             height={"40px"}
             alt='Diversified Logo'
@@ -39,6 +40,7 @@ const Navbar = () => {
             Diversified Events
           </span>
         </div>
+
         <div
           className='md:hidden'
           onClick={() => {

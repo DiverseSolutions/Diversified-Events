@@ -1,7 +1,9 @@
 import React from "react";
-import Logo from "../../assets/logo.png";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+
+import Logo from "../../assets/logo.png";
+import Logo1 from "../../assets/Diversified.jpeg";
 
 const Sidebar = () => {
   let navigate = useNavigate();
@@ -15,9 +17,9 @@ const Sidebar = () => {
     >
       <div className='flex items-center justify-center w-full'>
         <img
-          src={Logo}
-          width={"42px"}
-          height={"42px"}
+          src={Logo1}
+          width={"45px"}
+          height={"45px"}
           alt='Diversified Logo'
           className='mt-3 mb-[13px]'
           onClick={() => navigate("/")}
