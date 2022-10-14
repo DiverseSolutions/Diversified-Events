@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { showConnectWalletModal } from "../slices/modalSlice";
+import { connectMetamask } from "../slices/metamaskSlice";
+
 import Dropdown from "./Dropdown";
 import Logo from "../../assets/logo.png";
 
@@ -73,7 +75,7 @@ const Navbar = () => {
       </div>
 
       {open && (
-        <div className='absolute top-[70px] w-full border bg-white rounded-lg z-50'>
+        <div className='md:hidden absolute top-[70px] w-full border bg-white rounded-lg z-50'>
           <ul className='flex flex-col rounded-lg w-full '>
             <li
               className={`flex items-center w-full px-4 py-3 border-transparent rounded-lg cursor-pointer hover:bg-blue-100 hover:text-blue-800 gap-2`}
@@ -187,7 +189,14 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            "Connect wallet"
+            <div
+              className='flex justify-center py-4 border-t border-b'
+              onClick={() => {
+                dispatch(connectMetamask());
+              }}
+            >
+              <span className='text-center'>Connect wallet</span>
+            </div>
           )}
         </div>
       )}
