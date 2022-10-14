@@ -35,8 +35,7 @@ export default function MintEvent() {
             Create Event
           </span>
           <span className='text-center text-lg text-black'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis,
-            repellat.
+            Create your event and create your event NFT
           </span>
         </div>
         <div className='font-body'>
@@ -109,7 +108,7 @@ export default function MintEvent() {
             </div>
 
             <div className='space-y-2'>
-              <p className='font-medium'>Enter your event nft ipfs url</p>
+              <p className='font-medium'>Enter your event image poster uri</p>
               <input
                 type='url'
                 className='w-full h-12 px-3 border rounded focus:outline-none'
@@ -129,7 +128,7 @@ export default function MintEvent() {
                   className='w-full h-12 px-3 border rounded focus:outline-none'
                   onChange={handleChange}
                   name='referrableNftPrice'
-                  placeholder='0.005ETH'
+                  placeholder='100 KLAY'
                 />
               </div>
 

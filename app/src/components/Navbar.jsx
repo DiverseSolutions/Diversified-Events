@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { showConnectWalletModal } from "../slices/modalSlice";
+import { disconnectMetamask } from "../slices/metamaskSlice";
 import MobileNavbar from "./MobileNavbar";
 
 import Dropdown from "./Dropdown";
@@ -14,6 +15,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const metamask = useSelector((state) => state.metamask);
   const app = useSelector((state) => state.app);
+
+  console.log("metamask: ", metamask);
 
   return (
     <div className='flex flex-col md:flex-row h-[70px] justify-center items-center border-b border-t w-full'>
@@ -68,6 +71,17 @@ const Navbar = () => {
               "Connect wallet"
             )}
           </button>
+          {metamask && metamask.isConnected ? (
+            <button
+              className='text-blue-500'
+              onClick={() => dispatch(disconnectMetamask())}
+            >
+              Log out
+            </button>
+          ) : (
+            ""
+          )}
+
           <div className='justify-center hidden'>
             <Dropdown />
           </div>

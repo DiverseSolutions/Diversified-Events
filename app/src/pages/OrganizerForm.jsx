@@ -51,10 +51,7 @@ export default function OrganizerForm() {
             Become Event Organizer
           </span>
 
-          <p className='text-lg text-black'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis,
-            repellat.
-          </p>
+          <span className='text-lg text-black'>Create your organizer role</span>
         </div>
         <div className='xl:container mx-auto xl:px-20 md:px-12 px-4 font-body'>
           <div className='w-full sm:w-2/3 md:w-1/2 lg:w-2/5 mx-auto border rounded-2xl my-5 p-6 space-y-6'>
@@ -64,7 +61,7 @@ export default function OrganizerForm() {
                 name='_username'
                 type='text'
                 className='border rounded w-full h-12 px-3 focus:outline-none'
-                placeholder='Chingun Amarbaatar'
+                placeholder='Name'
                 onChange={handleChange}
               />
             </div>
@@ -74,7 +71,7 @@ export default function OrganizerForm() {
                 name='_email'
                 className='border rounded w-full h-12 px-3 focus:outline-none'
                 type='email'
-                placeholder='chingunee.dev@gmail.com'
+                placeholder='dev@gmail.com'
                 onChange={handleChange}
               />
             </div>
@@ -84,7 +81,7 @@ export default function OrganizerForm() {
                 name='_linkedIn'
                 className='border rounded w-full h-12 px-3 focus:outline-none'
                 type='url'
-                placeholder='www.linkedin.com/in/chingunee'
+                placeholder='www.linkedin.com/in/username'
                 onChange={handleChange}
               />
             </div>
