@@ -23,8 +23,7 @@ export default function CameraModal() {
 
     const qrCodeSuccessCallback = async (decodedText, decodedResult) => {
       let eventId = modal.cameraData
-      let capturedEventId = decodedText
-      let userAddress = ethereum.selectedAddress
+      let [capturedEventId,userAddress] = decodedText.split[',']
 
       if(isNaN(capturedEventId)){
         dispatch(triggerErrorAlert({content: "Not Event QR"}));
@@ -45,7 +44,7 @@ export default function CameraModal() {
           if(balanceBN.toNumber() > 0){
             dispatch(triggerSuccessAlert({content: "Event Access Approved"}));
           }else{
-            dispatch(triggerSuccessAlert({content: "User Doesn't Have Nft"}));
+            dispatch(triggerErrorAlert({content: "User Doesn't Have Nft"}));
           }
         }catch(e){
           alert(e)

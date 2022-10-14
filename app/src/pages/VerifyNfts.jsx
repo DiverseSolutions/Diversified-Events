@@ -53,7 +53,6 @@ export default function VerifyNfts() {
       }
     }
 
-    console.log(eventDataArray);
     setEvents(eventDataArray);
     setLoading(false);
   }

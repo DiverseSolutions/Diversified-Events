@@ -14,7 +14,7 @@ export default function QrReaderModal() {
         <div className='grid grid-cols-7 w-full justify-between'>
           <div className='col-span-1'></div>
           <span className='text-xl font-bold col-span-4 col-start-3'>
-            Check balance of
+            My QR
           </span>
           <div className='flex justify-end '>
             <svg
@@ -37,7 +37,7 @@ export default function QrReaderModal() {
           <QRCode
             size={256}
             style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-            value={modal && modal.qrData.toString()}
+            value={modal && `${modal.qrData.toString()},${ethereum.selectedAddress}`}
             viewBox={`0 0 256 256`}
           />
         </div>
