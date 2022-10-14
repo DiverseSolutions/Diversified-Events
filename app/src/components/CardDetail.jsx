@@ -1,6 +1,4 @@
 import React from "react";
-import moment from "moment";
-import CardDetails from "../../dummyData/CardDetail";
 
 const CardDetail = ({ events }) => {
   return (
@@ -23,8 +21,8 @@ const CardDetail = ({ events }) => {
               <div className='flex justify-center w-full rounded-xl'>
                 <img
                   src={data.eventDetails.profile}
-                  width='50%'
-                  alt=''
+                  width='100%'
+                  alt='Event image'
                   className='rounded-xl'
                 />
               </div>

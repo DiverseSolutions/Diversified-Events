@@ -39,7 +39,6 @@ export default function CameraModal() {
               viewBox='0 0 15 15'
               onClick={() => {
                 dispatch(hideCameraModal());
-                html5QrCode.stop();
               }}
               className='col-span-1 flex justify-items-end justify-evenly just'
             >

@@ -35,10 +35,10 @@ export default function VerifyNfts() {
       if (eventAddress != null) {
         const { eventReadContract } = await getEventContract(eventAddress);
         let nftAddress = await eventReadContract.nft();
-        const { nftReadContract } = await getNftContract(nftAddress)
-        let balanceBN = await nftReadContract.balanceOf(userAddress)
+        const { nftReadContract } = await getNftContract(nftAddress);
+        let balanceBN = await nftReadContract.balanceOf(userAddress);
 
-        if(balanceBN.toNumber() > 0 ){
+        if (balanceBN.toNumber() > 0) {
           let eventDetails = await eventReadContract.eventDetails();
           let eventNftDetails = await eventReadContract.eventNftDetails();
           let eventStatus = await eventReadContract.eventStatus();
@@ -52,20 +52,21 @@ export default function VerifyNfts() {
 
           eventDataArray.push(eventData);
         }
-
       }
     }
 
-    console.log(eventDataArray)
+    console.log(eventDataArray);
     setEvents(eventDataArray);
   }
 
+  console.log("events: ", events);
+
   return (
-    <div className="min-h-screen w-full flex justify-center mt-10">
-      <div className="flex max-w-5xl justify-center">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full min-h-64">
-          {EventCardData.map((data, index) => (
-            <VerifyNftCard key={index} data={data} />
+    <div className='min-h-screen w-full flex justify-center mt-10'>
+      <div className='flex max-w-5xl justify-center'>
+        <div className='grid grid-cols-1 sm:grid-cols-3 gap-3 w-full h-64'>
+          {events.map((data, index) => (
+            <VerifyNftCard key={index} events={events} />
           ))}
         </div>
       </div>

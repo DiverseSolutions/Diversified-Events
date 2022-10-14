@@ -16,8 +16,6 @@ const Navbar = () => {
   const metamask = useSelector((state) => state.metamask);
   const app = useSelector((state) => state.app);
 
-  console.log("metamask: ", metamask);
-
   return (
     <div className='flex flex-col md:flex-row h-[70px] justify-center items-center border-b border-t w-full'>
       <div className='flex items-center justify-between px-3 sm:px-8 lg:5 xl:px-1 max-w-5xl w-full'>
